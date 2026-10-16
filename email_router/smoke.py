@@ -26,7 +26,11 @@ def assess(report, expected_target):
         problems.append("wrong_action_or_recipient")
     if len(outgoing) != 1 or outgoing[0].get("recipient_ref") != expected_target:
         problems.append("wrong_saved_mail")
-    if report["reviews"]:
+    required_review_ids = {a["review_id"] for a in actions if a.get("content_delivery") == "requires_staff"}
+    staff_reviews = [r for r in report["reviews"] if r.get("kind") == "critical_data_review"
+                     and r["id"] in required_review_ids and r.get("queue_ref") == expected_target
+                     and r.get("state") == "awaiting_staff"]
+    if len(staff_reviews) != len(report["reviews"]) or {r["id"] for r in staff_reviews} != required_review_ids:
         problems.append("unexpected_human_review")
     if len(actions) == len(outgoing) == 1:
         if actions[0].get("outgoing_message_id") != outgoing[0]["id"]:

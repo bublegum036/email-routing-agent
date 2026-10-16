@@ -1,5 +1,6 @@
 {
   "processing_date": "2026-10-16",
+  "data_classification": "synthetic",
   "customers": [
     {"id":"C-11","name":"Вектор Север","sales_owner_ref":"sales_north"},
     {"id":"C-12","name":"Вектор Сервис","sales_owner_ref":"sales_service"},

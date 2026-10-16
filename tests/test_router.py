@@ -13,6 +13,7 @@ from unittest.mock import patch
 from email_router.demo_model import DemoModel
 from email_router.llm import ChatModel, ModelError, http_error, network_error
 from email_router.quota import safe_quota
+from email_router.policy import cloud_context_allowed, critical_record
 from email_router.runner import Runner, ground_hints
 from email_router.store import Store, encode
 from email_router.tools import Tools
@@ -51,6 +52,31 @@ class StoreCase(unittest.TestCase):
 
 
 class ToolTests(StoreCase):
+    def test_routing_sends_only_staff_reference_and_requires_content_review(self):
+        args = self.order_proposal()
+        args["summary"] = "PRIVATE invented payment details MUST NOT be sent"
+        answer = self.tools.call("route_request", args)
+        self.assertEqual(answer["status"], "applied")
+        self.assertEqual(answer["content_delivery"], "requires_staff")
+        outgoing = json.loads(self.store.db.execute("SELECT payload FROM outgoing").fetchone()[0])
+        self.assertEqual(outgoing["kind"], "staff_routing_notice")
+        self.assertNotIn("source_text", outgoing)
+        self.assertNotIn("summary", outgoing)
+        self.assertNotIn("PRIVATE", encode(outgoing))
+        self.assertNotIn(self.tools.message["text"], encode(outgoing))
+        self.assertEqual(outgoing["attachments"], [])
+        review = json.loads(self.store.db.execute("SELECT payload FROM reviews WHERE id=?", (answer["review_id"],)).fetchone()[0])
+        self.assertEqual(review["kind"], "critical_data_review")
+        self.assertEqual(review["state"], "awaiting_staff")
+        self.assertEqual(review["queue_ref"], "order_operations")
+
+    def test_model_cannot_supply_staff_approval_or_attachment(self):
+        args = self.order_proposal()
+        args["staff_approved"] = True
+        args["attachments"] = ["private-contract.pdf"]
+        self.assertEqual(self.tools.call("route_request", args)["status"], "invalid_arguments")
+        self.assertEqual(self.store.db.execute("SELECT COUNT(*) FROM outgoing").fetchone()[0], 0)
+
     def test_ambiguous_customer_requires_available_history_before_clarification(self):
         self.setup_issue("mail-01", "technical", "Терминалы")
         lookup = self.read("resolve_customer")
@@ -216,6 +242,46 @@ class ToolTests(StoreCase):
 
 
 class ControllerTests(StoreCase):
+    def test_real_or_unclassified_data_is_handed_to_staff_before_model_call(self):
+        class MustNotCallModel(DemoModel):
+            is_live = True
+            def complete(self, *args, **kwargs):
+                raise AssertionError("Restricted data must not reach a cloud model")
+        message = self.store.get("messages", "mail-02")
+        message.pop("data_classification")
+        with self.store.db:
+            self.store.put("messages", message)
+        self.assertFalse(cloud_context_allowed(self.store))
+        report = Runner(self.store, MustNotCallModel()).run("mail-02")
+        self.assertEqual(report["actions"][0]["reason"], "sensitive_data")
+        self.assertEqual(report["issues"][0]["state"], "human_review")
+        self.assertEqual(report["outgoing"], [])
+        self.assertFalse(any(e["kind"] == "model_request" for e in report["events"]))
+        self.assertTrue(report["redacted_for_staff"])
+        self.assertNotIn(message["text"], encode(report))
+        self.assertNotIn(message["sender"], encode(report))
+
+    def test_critical_source_blocks_cloud_even_with_synthetic_message(self):
+        class MustNotCallModel(DemoModel):
+            is_live = True
+            def complete(self, *args, **kwargs):
+                raise AssertionError("Critical source must not reach a cloud model")
+        with self.store.db:
+            self.store.put("orders", self.store.get("orders", "O-52") | {"data_classification": "critical"})
+        report = Runner(self.store, MustNotCallModel(), "workflow").run("mail-02")
+        self.assertEqual(report["actions"][0]["reason"], "sensitive_data")
+        self.assertFalse(any(e["kind"] == "model_request" for e in report["events"]))
+
+    def test_synthetic_multi_issue_fixture_can_use_model_interface_safely(self):
+        class LocalModelDouble(DemoModel):
+            is_live = True  # Exercises cloud boundary without network; test double only.
+        self.assertTrue(cloud_context_allowed(self.store))
+        report = Runner(self.store, LocalModelDouble(), "agent").run("mail-07")
+        self.assertEqual([i["state"] for i in report["issues"]], ["routed", "routed"])
+        self.assertTrue(cloud_context_allowed(self.store))
+        self.assertTrue(all(o["kind"] == "staff_routing_notice" for o in report["outgoing"]))
+        self.assertTrue(all(a["content_delivery"] == "requires_staff" for a in report["actions"]))
+
     def test_real_failed_extraction_is_recovered_from_explicit_order_number(self):
         # Exact malformed arguments from the saved real workflow-mail-02 attempt.
         raw = {"issues": [{"category": "order",
@@ -344,6 +410,18 @@ class ControllerTests(StoreCase):
 
 
 class ClientTests(unittest.TestCase):
+    def test_critical_categories_and_payment_invoice_exception(self):
+        base = {"data_classification": "operational", "contains_personal_data": False}
+        for document_type in ("customer_contract", "acceptance_certificate", "document_workflow"):
+            with self.subTest(document_type=document_type):
+                self.assertTrue(critical_record(base | {"document_type": document_type}))
+        self.assertTrue(critical_record(base | {"contains_personal_data": True}))
+        self.assertFalse(critical_record(base | {"document_type": "payment_invoice"}))
+        self.assertTrue(critical_record(base | {"document_type": "payment_invoice", "contains_personal_data": True}))
+        self.assertTrue(critical_record({"document_type": "payment_invoice"}))
+        self.assertTrue(critical_record({}))
+        self.assertTrue(critical_record(base, "contracts"))
+        self.assertFalse(critical_record({"data_classification": "synthetic"}))
     def test_smoke_can_run_one_workflow_case_without_other_requests(self):
         from email_router import smoke
         class Model:

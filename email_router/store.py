@@ -5,6 +5,7 @@ import sqlite3
 import time
 import uuid
 from pathlib import Path
+from .policy import cloud_context_allowed, public_report
 
 
 def encode(value):
@@ -59,7 +60,7 @@ class Store:
             for kind, rows in data.items():
                 if isinstance(rows, list):
                     for row in rows:
-                        self.put(kind, row)
+                        self.put(kind, row | {"data_classification": data.get("data_classification", "restricted")})
 
     def put(self, kind, value):
         self.db.execute("INSERT INTO entities VALUES(?,?,?) ON CONFLICT(kind,id) "
@@ -113,7 +114,7 @@ class Store:
         run = dict(self.db.execute("SELECT * FROM runs WHERE id=?", (run_id,)).fetchone())
         run["config"] = json.loads(run.pop("payload"))
         message = self.get("messages", run["message_id"])
-        return {
+        report = {
             "run": run, "message": message, "issues": self.issues(message["id"]),
             "actions": [json.loads(r[0]) for r in self.db.execute(
                 "SELECT a.receipt FROM actions a JOIN issues i ON i.id=a.issue_id WHERE i.message_id=?",
@@ -125,3 +126,4 @@ class Store:
             "reviews": [json.loads(r[0]) for r in self.db.execute(
                 "SELECT payload FROM reviews WHERE message_id=?", (message["id"],))],
         }
+        return report if cloud_context_allowed(self) else public_report(report)

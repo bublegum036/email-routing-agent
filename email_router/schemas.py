@@ -29,7 +29,7 @@ EVIDENCE = array(string("Observation ID returned by a read tool"))
 CATEGORY = choice("technical", "order", "purchase", "approval")
 REASONS = choice("identity_unverified", "ambiguous_context", "source_unavailable",
                  "closed_ticket", "forbidden_request", "conflicting_facts",
-                 "missing_owner", "unsupported_case")
+                 "missing_owner", "unsupported_case", "sensitive_data")
 MISSING = choice("company_identifier", "order_id", "ticket_id", "proposal_reference",
                  "equipment_details", "problem_details")
 SPECS = {
@@ -44,7 +44,7 @@ SPECS = {
     "find_tickets": ("Before routing each issue, find its existing ticket. For an order question pass order_id explicitly, e.g. O-52, not only in subject. Use exact T-number when known; subject must describe THIS issue. Similar tickets or ambiguous linkage require clarification/human review, never blind merging.",
                      obj({"customer_id": string(), "subject": string(), "ticket_id": string(),
                           "order_id": string()}, ("ticket_id", "order_id"))),
-    "route_request": ("Propose routing ONE registered issue. Code validates evidence and target before atomically creating/appending a ticket and saving internal mail. Existing open ticket must use its current assignee. Never change commercial orders or contracts.",
+    "route_request": ("Route ONE issue to staff. Code validates facts and target, creates/appends a ticket and sends ONLY a fixed staff notice with internal references. Critical data, source text and model summary are NOT sent automatically; a staff review is created. Existing open ticket must use its current assignee. Never change commercial orders or contracts.",
                       obj({"issue_id": string(), "customer_id": string(), "category": CATEGORY,
                            "target_ref": string("Recipient role: order_operations, logistics, general_support, or an owner/group ID from tool results. Never an order/contract number or email address."), "summary": string(), "evidence_ids": EVIDENCE,
                            "ticket_id": string()}, ("ticket_id",))),

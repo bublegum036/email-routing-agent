@@ -8,6 +8,7 @@ from email.utils import parseaddr
 
 from .schemas import ACTIONS, READS, SPECS, validate
 from .store import encode, uid
+from .policy import routing_notice
 
 
 def result(status, data=None, candidates=None, code=None):
@@ -302,17 +303,22 @@ class Tools:
                               "assignee_ref": basis["target"], "category": args["category"],
                               "subject": issue["payload"]["subject"],
                               "order_id": basis["search"]["args"].get("order_id"),
-                              "thread_id": self.message["thread_id"], "message_ids": []}
+                              "thread_id": self.message["thread_id"], "message_ids": [],
+                              "data_classification": self.message.get("data_classification", "restricted")}
                 ticket["message_ids"] = list(dict.fromkeys(ticket["message_ids"] + [self.message["id"]]))
                 s.put("tickets", ticket)
                 target = s.get("recipients", basis["target"])
-                outgoing = {"id": uid("out"), "message_id": self.message["id"], "issue_id": issue["id"],
-                            "recipient": target["address"], "recipient_ref": target["id"],
-                            "kind": "internal_forward", "source_text": self.message["text"],
-                            "summary": args["summary"], "ticket_id": ticket["id"], "attachments": []}
+                outgoing = routing_notice(self.message["id"], issue["id"], ticket["id"], target["id"], uid("out"))
+                outgoing["recipient"] = target["address"]
+                review = {"id": uid("review"), "message_id": self.message["id"], "issue_id": issue["id"],
+                          "kind": "critical_data_review", "queue_ref": target["id"],
+                          "reason": "sensitive_data", "ticket_id": ticket["id"],
+                          "state": "awaiting_staff", "content_delivery": "requires_staff"}
+                s.db.execute("INSERT INTO reviews VALUES(?,?,?)", (review["id"], self.message["id"], encode(review)))
                 receipt |= {"ticket_id": ticket["id"], "ticket_operation": operation,
                             "recipient_ref": target["id"], "recipient_address": target["address"],
-                            "outgoing_message_id": outgoing["id"]}
+                            "outgoing_message_id": outgoing["id"], "review_id": review["id"],
+                            "content_delivery": "requires_staff"}
                 state = "routed"
             elif name == "request_clarification":
                 fields = list(dict.fromkeys(args["missing_fields"]))
