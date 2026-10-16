@@ -1,0 +1,45 @@
+{
+  "live_model": false,
+  "mode": "agent",
+  "requested_model": "scripted-development-fixture",
+  "requested_checks": 3,
+  "checks": [
+    {
+      "case": "critical",
+      "passed": true,
+      "problems": [],
+      "model_calls": 0,
+      "trace": "critical.json",
+      "states": [
+        "human_review"
+      ],
+      "http_429": false,
+      "network_failure": false
+    },
+    {
+      "case": "ambiguous",
+      "passed": true,
+      "problems": [],
+      "model_calls": 3,
+      "trace": "ambiguous.json",
+      "states": [
+        "awaiting_customer"
+      ],
+      "http_429": false,
+      "network_failure": false
+    },
+    {
+      "case": "unavailable",
+      "passed": true,
+      "problems": [],
+      "model_calls": 4,
+      "trace": "unavailable.json",
+      "states": [
+        "human_review"
+      ],
+      "http_429": false,
+      "network_failure": false
+    }
+  ],
+  "skipped": []
+}

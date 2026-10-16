@@ -1,0 +1,74 @@
+{
+  "run": {
+    "id": "run-fcdd5faf825c4894",
+    "message_id": "mail-01",
+    "mode": "agent",
+    "backend": "offline:scripted-development-fixture",
+    "started": 1792189449.732327,
+    "config": {
+      "adapter_version": "2",
+      "data_policy_version": "1",
+      "live_model": true,
+      "max_tokens": 2400,
+      "prompt_version": "4",
+      "provider": "offline",
+      "requested_model": "scripted-development-fixture",
+      "temperature": 0,
+      "tool_version": "4"
+    }
+  },
+  "message": {
+    "id": "mail-01",
+    "thread_id": "thread-01"
+  },
+  "issues": [
+    {
+      "id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "payload": {
+        "subject": "Содержимое доступно только сотруднику"
+      },
+      "state": "human_review"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "act-7226cedd01264834",
+      "issue_id": "mail-01:issue-1",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data",
+      "review_id": "review-da98e5adf03b4e8e",
+      "status": "applied"
+    }
+  ],
+  "events": [
+    {
+      "kind": "tool",
+      "at": 1792189449.733393,
+      "payload": {
+        "redacted": "staff_only"
+      }
+    },
+    {
+      "kind": "run_end",
+      "at": 1792189449.73379,
+      "payload": {
+        "elapsed_seconds": 0.001,
+        "model_calls": 0,
+        "status": "completed",
+        "tool_calls": 0
+      }
+    }
+  ],
+  "outgoing": [],
+  "reviews": [
+    {
+      "id": "review-da98e5adf03b4e8e",
+      "issue_id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data"
+    }
+  ],
+  "redacted_for_staff": true
+}
