@@ -1,0 +1,344 @@
+{
+  "split": "development",
+  "live_model": false,
+  "source_hashes": {
+    "__init__.py": "a1dcc8fe347a10387b9ea6debaef882c4543d00914bbe8c3cf7402502d56616f",
+    "__main__.py": "15abed0364458cd48f4bf7d6ca63c99107d33d8d46c60087ba3e3b986c6b4dba",
+    "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246",
+    "doctor.py": "093f976e2446138db05b710036efde6fa02185f55ff8fee54016dcf49eba8f7f",
+    "error_cases.py": "8f7f5fcd2813cfb215a14d2471f4c95a38c299164cc16849b6fdfccd0de153a4",
+    "evaluate.py": "d1d0b57d3bb6db3f126edc10ad0fb9db2a1b02e6323848bf88f5d0c33a805361",
+    "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+    "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+    "quota.py": "2babb033de363e355369076890488573fa2bfb727cd477b927192697a447827f",
+    "runner.py": "7be1332231f457a9355af9d7c9b0acca308314adf50691d18b9005e981bb6d27",
+    "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+    "smoke.py": "25c1a004a7371985c7d26c890ea25c532909809543eae07c42cc63abcca4ca5b",
+    "store.py": "c4fd2d1c4501884f8a370ae1a06619f3699511bb5e6d664d99c1a76ab2852929",
+    "tools.py": "dcba47142eee42d326d51d237458e94050bef8a4dde48e83d33c3db5c6555ee6"
+  },
+  "cases_per_mode": 8,
+  "checks": [
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-01.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 0.005,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-01.json",
+      "metrics": {
+        "model_calls": 7,
+        "tool_calls": 6,
+        "elapsed_seconds": 0.011,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-02.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 0.004,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-02.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.008,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-03.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 0.006,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-03.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.008,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-04",
+      "path": "existing_ticket",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-04.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.003,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-04",
+      "path": "existing_ticket",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-04.json",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 3,
+        "elapsed_seconds": 0.006,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-05",
+      "path": "thread_approval",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-05.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 0.004,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-05",
+      "path": "thread_approval",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-05.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.008,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-06",
+      "path": "identity_unverified",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-06.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 3,
+        "elapsed_seconds": 0.003,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 0
+      }
+    },
+    {
+      "message": "mail-06",
+      "path": "identity_unverified",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-06.json",
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.004,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 0
+      }
+    },
+    {
+      "message": "mail-07",
+      "path": "two_issues",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-07.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 8,
+        "elapsed_seconds": 0.006,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 2
+      }
+    },
+    {
+      "message": "mail-07",
+      "path": "two_issues",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-07.json",
+      "metrics": {
+        "model_calls": 8,
+        "tool_calls": 7,
+        "elapsed_seconds": 0.014,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 2
+      }
+    },
+    {
+      "message": "mail-08",
+      "path": "forbidden_external_contract",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-08.json",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.003,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      }
+    },
+    {
+      "message": "mail-08",
+      "path": "forbidden_external_contract",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-08.json",
+      "metrics": {
+        "model_calls": 2,
+        "tool_calls": 1,
+        "elapsed_seconds": 0.003,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      }
+    }
+  ],
+  "stopped": false
+}

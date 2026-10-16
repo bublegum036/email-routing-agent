@@ -1,0 +1,13 @@
+{
+  "split": "development",
+  "cases": [
+    {"message": "mail-01", "path": "thread_contract_expired", "routes": [{"customer": "C-12", "category": "technical", "target": "marina"}]},
+    {"message": "mail-02", "path": "paid_not_shipped", "routes": [{"customer": "C-21", "category": "order", "target": "order_operations"}]},
+    {"message": "mail-03", "path": "shipped_logistics", "routes": [{"customer": "C-11", "category": "order", "target": "logistics"}]},
+    {"message": "mail-04", "path": "existing_ticket", "routes": [{"customer": "C-31", "category": "technical", "target": "sergey", "ticket": "T-9"}]},
+    {"message": "mail-05", "path": "thread_approval", "routes": [{"customer": "C-11", "category": "approval", "target": "sales_north"}]},
+    {"message": "mail-06", "path": "identity_unverified", "outcome": "identity"},
+    {"message": "mail-07", "path": "two_issues", "routes": [{"customer": "C-21", "category": "purchase", "target": "sales_orion"}, {"customer": "C-21", "category": "order", "target": "order_operations"}]},
+    {"message": "mail-08", "path": "forbidden_external_contract", "outcome": "forbidden"}
+  ]
+}

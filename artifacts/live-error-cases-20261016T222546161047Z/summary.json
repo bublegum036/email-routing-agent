@@ -1,0 +1,45 @@
+{
+  "live_model": true,
+  "mode": "agent",
+  "requested_model": "gemini-3.5-flash-lite",
+  "requested_checks": 3,
+  "checks": [
+    {
+      "case": "critical",
+      "passed": true,
+      "problems": [],
+      "model_calls": 0,
+      "trace": "critical.json",
+      "states": [
+        "human_review"
+      ],
+      "http_429": false,
+      "network_failure": false
+    },
+    {
+      "case": "ambiguous",
+      "passed": true,
+      "problems": [],
+      "model_calls": 3,
+      "trace": "ambiguous.json",
+      "states": [
+        "human_review"
+      ],
+      "http_429": false,
+      "network_failure": false
+    },
+    {
+      "case": "unavailable",
+      "passed": true,
+      "problems": [],
+      "model_calls": 6,
+      "trace": "unavailable.json",
+      "states": [
+        "human_review"
+      ],
+      "http_429": false,
+      "network_failure": false
+    }
+  ],
+  "skipped": []
+}

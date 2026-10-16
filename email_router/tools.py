@@ -295,7 +295,9 @@ class Tools:
                 if "status" in basis:
                     s.db.rollback()
                     return basis
-                ticket = basis["ticket"]
+                # Read results include explanation fields (match_basis, ticket_id).
+                # Persist the source ticket, not the enriched tool response.
+                ticket = s.get("tickets", basis["ticket"]["id"]) if basis["ticket"] else None
                 operation = "appended" if ticket else "created"
                 if not ticket:
                     numbers = [int(t["id"][2:]) for t in s.all("tickets") if re.fullmatch(r"T-\d+", t["id"])]

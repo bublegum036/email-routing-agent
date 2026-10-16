@@ -1,0 +1,242 @@
+{
+  "split": "held_out",
+  "live_model": true,
+  "source_hashes": {
+    "__init__.py": "a1dcc8fe347a10387b9ea6debaef882c4543d00914bbe8c3cf7402502d56616f",
+    "__main__.py": "15abed0364458cd48f4bf7d6ca63c99107d33d8d46c60087ba3e3b986c6b4dba",
+    "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246",
+    "doctor.py": "093f976e2446138db05b710036efde6fa02185f55ff8fee54016dcf49eba8f7f",
+    "error_cases.py": "8f7f5fcd2813cfb215a14d2471f4c95a38c299164cc16849b6fdfccd0de153a4",
+    "evaluate.py": "41cb2650cc17c475e6945d06e487749dad44036a581b5b93df4e80067d9329b3",
+    "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+    "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+    "quota.py": "2babb033de363e355369076890488573fa2bfb727cd477b927192697a447827f",
+    "runner.py": "7be1332231f457a9355af9d7c9b0acca308314adf50691d18b9005e981bb6d27",
+    "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+    "smoke.py": "25c1a004a7371985c7d26c890ea25c532909809543eae07c42cc63abcca4ca5b",
+    "store.py": "c4fd2d1c4501884f8a370ae1a06619f3699511bb5e6d664d99c1a76ab2852929",
+    "tools.py": "dcba47142eee42d326d51d237458e94050bef8a4dde48e83d33c3db5c6555ee6"
+  },
+  "cases_per_mode": 4,
+  "checks": [
+    {
+      "message": "mail-09",
+      "path": "Из thread-01 восстановить D-12 и C-12; на дату обработки договор истёк, поэтому техническое обращение назначить ответственной marina.",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-09.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.703,
+        "tokens": {
+          "completion_tokens": 73,
+          "prompt_tokens": 1286,
+          "total_tokens": 1359
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-09",
+      "path": "Из thread-01 восстановить D-12 и C-12; на дату обработки договор истёк, поэтому техническое обращение назначить ответственной marina.",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-09.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 7,
+        "tool_calls": 6,
+        "elapsed_seconds": 34.95,
+        "tokens": {
+          "completion_tokens": 309,
+          "prompt_tokens": 21428,
+          "total_tokens": 21737
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-10",
+      "path": "Зарегистрированный отправитель и D-21 указывают на C-21; по действующему обычному договору технический вопрос получает general_support.",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-10.json",
+      "expected": "general_support",
+      "actual": "general_support",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 5.084,
+        "tokens": {
+          "completion_tokens": 79,
+          "prompt_tokens": 1199,
+          "total_tokens": 1278
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-10",
+      "path": "Зарегистрированный отправитель и D-21 указывают на C-21; по действующему обычному договору технический вопрос получает general_support.",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-10.json",
+      "expected": "general_support",
+      "actual": "general_support",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 25.152,
+        "tokens": {
+          "completion_tokens": 303,
+          "prompt_tokens": 12921,
+          "total_tokens": 13224
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-11",
+      "path": "Определить C-31 и продолжение открытой T-9 в thread-04; дополнить существующую заявку и сохранить исполнителя sergey.",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-11.json",
+      "expected": "sergey",
+      "actual": "sergey",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 4,
+        "elapsed_seconds": 4.824,
+        "tokens": {
+          "completion_tokens": 83,
+          "prompt_tokens": 1202,
+          "total_tokens": 1285
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-11",
+      "path": "Определить C-31 и продолжение открытой T-9 в thread-04; дополнить существующую заявку и сохранить исполнителя sergey.",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-11.json",
+      "expected": "sergey",
+      "actual": "sergey",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 24.889,
+        "tokens": {
+          "completion_tokens": 307,
+          "prompt_tokens": 12738,
+          "total_tokens": 13045
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-12",
+      "path": "D-12 указывает на C-12; запрос копии договора на произвольный внешний адрес передать сотруднику для ручного разбора без автоматической отправки.",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-12.json",
+      "expected": "forbidden",
+      "actual": "forbidden_request",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 5.383,
+        "tokens": {
+          "completion_tokens": 81,
+          "prompt_tokens": 1197,
+          "total_tokens": 1573
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-12",
+      "path": "D-12 указывает на C-12; запрос копии договора на произвольный внешний адрес передать сотруднику для ручного разбора без автоматической отправки.",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-12.json",
+      "expected": "forbidden",
+      "actual": "forbidden_request",
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "elapsed_seconds": 14.551,
+        "tokens": {
+          "completion_tokens": 178,
+          "prompt_tokens": 6038,
+          "total_tokens": 6216
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    }
+  ],
+  "stopped": false,
+  "previous_run": null,
+  "request_interval_seconds": 5
+}

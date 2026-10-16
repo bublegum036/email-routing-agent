@@ -1,0 +1,180 @@
+{
+  "split": "development",
+  "live_model": true,
+  "source_hashes": {
+    "__init__.py": "a1dcc8fe347a10387b9ea6debaef882c4543d00914bbe8c3cf7402502d56616f",
+    "__main__.py": "15abed0364458cd48f4bf7d6ca63c99107d33d8d46c60087ba3e3b986c6b4dba",
+    "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246",
+    "doctor.py": "093f976e2446138db05b710036efde6fa02185f55ff8fee54016dcf49eba8f7f",
+    "error_cases.py": "8f7f5fcd2813cfb215a14d2471f4c95a38c299164cc16849b6fdfccd0de153a4",
+    "evaluate.py": "a022b1d4f1e3fc31101606c8afbd8586fd335439d8d4f7be3d62de029aea5bcd",
+    "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+    "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+    "quota.py": "2babb033de363e355369076890488573fa2bfb727cd477b927192697a447827f",
+    "runner.py": "7be1332231f457a9355af9d7c9b0acca308314adf50691d18b9005e981bb6d27",
+    "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+    "smoke.py": "25c1a004a7371985c7d26c890ea25c532909809543eae07c42cc63abcca4ca5b",
+    "store.py": "c4fd2d1c4501884f8a370ae1a06619f3699511bb5e6d664d99c1a76ab2852929",
+    "tools.py": "dcba47142eee42d326d51d237458e94050bef8a4dde48e83d33c3db5c6555ee6"
+  },
+  "cases_per_mode": 8,
+  "checks": [
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-01.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.807,
+        "tokens": {
+          "completion_tokens": 78,
+          "prompt_tokens": 1284,
+          "total_tokens": 1362
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-01.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 9,
+        "tool_calls": 8,
+        "elapsed_seconds": 13.699,
+        "tokens": {
+          "completion_tokens": 391,
+          "prompt_tokens": 30340,
+          "total_tokens": 30731
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 2,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-02.json",
+      "expected": "order_operations",
+      "actual": "order_operations",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.622,
+        "tokens": {
+          "completion_tokens": 73,
+          "prompt_tokens": 1198,
+          "total_tokens": 1271
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-02.json",
+      "expected": "order_operations",
+      "actual": "order_operations",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 6.12,
+        "tokens": {
+          "completion_tokens": 319,
+          "prompt_tokens": 9317,
+          "total_tokens": 9636
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-03.json",
+      "expected": "logistics",
+      "actual": "logistics",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.393,
+        "tokens": {
+          "completion_tokens": 75,
+          "prompt_tokens": 1197,
+          "total_tokens": 1272
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      }
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "agent",
+      "passed": false,
+      "problems": [
+        "missing_expected_action",
+        "unexpected_action_or_category",
+        "wrong_issue_or_mail_count",
+        "wrong_recipients_or_action_count",
+        "wrong_ticket_count"
+      ],
+      "trace": "agent-mail-03.json",
+      "expected": "logistics",
+      "actual": "unsupported_case",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 0,
+        "elapsed_seconds": 0.856,
+        "tokens": null,
+        "actual_models": [],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      }
+    }
+  ],
+  "stopped": true
+}

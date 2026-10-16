@@ -1,0 +1,490 @@
+{
+  "split": "development",
+  "live_model": true,
+  "source_hashes": {
+    "__init__.py": "a1dcc8fe347a10387b9ea6debaef882c4543d00914bbe8c3cf7402502d56616f",
+    "__main__.py": "15abed0364458cd48f4bf7d6ca63c99107d33d8d46c60087ba3e3b986c6b4dba",
+    "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246",
+    "doctor.py": "093f976e2446138db05b710036efde6fa02185f55ff8fee54016dcf49eba8f7f",
+    "error_cases.py": "8f7f5fcd2813cfb215a14d2471f4c95a38c299164cc16849b6fdfccd0de153a4",
+    "evaluate.py": "41cb2650cc17c475e6945d06e487749dad44036a581b5b93df4e80067d9329b3",
+    "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+    "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+    "quota.py": "2babb033de363e355369076890488573fa2bfb727cd477b927192697a447827f",
+    "runner.py": "7be1332231f457a9355af9d7c9b0acca308314adf50691d18b9005e981bb6d27",
+    "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+    "smoke.py": "25c1a004a7371985c7d26c890ea25c532909809543eae07c42cc63abcca4ca5b",
+    "store.py": "c4fd2d1c4501884f8a370ae1a06619f3699511bb5e6d664d99c1a76ab2852929",
+    "tools.py": "dcba47142eee42d326d51d237458e94050bef8a4dde48e83d33c3db5c6555ee6"
+  },
+  "cases_per_mode": 8,
+  "checks": [
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "../live-comparison-20261016T223012500365Z/workflow-mail-01.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.807,
+        "tokens": {
+          "completion_tokens": 78,
+          "prompt_tokens": 1284,
+          "total_tokens": 1362
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "../live-comparison-20261016T223012500365Z/agent-mail-01.json",
+      "expected": "marina",
+      "actual": "marina",
+      "metrics": {
+        "model_calls": 9,
+        "tool_calls": 8,
+        "elapsed_seconds": 13.699,
+        "tokens": {
+          "completion_tokens": 391,
+          "prompt_tokens": 30340,
+          "total_tokens": 30731
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 2,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "../live-comparison-20261016T223012500365Z/workflow-mail-02.json",
+      "expected": "order_operations",
+      "actual": "order_operations",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.622,
+        "tokens": {
+          "completion_tokens": 73,
+          "prompt_tokens": 1198,
+          "total_tokens": 1271
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "../live-comparison-20261016T223012500365Z/agent-mail-02.json",
+      "expected": "order_operations",
+      "actual": "order_operations",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 6.12,
+        "tokens": {
+          "completion_tokens": 319,
+          "prompt_tokens": 9317,
+          "total_tokens": 9636
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "../live-comparison-20261016T223012500365Z/workflow-mail-03.json",
+      "expected": "logistics",
+      "actual": "logistics",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 1.393,
+        "tokens": {
+          "completion_tokens": 75,
+          "prompt_tokens": 1197,
+          "total_tokens": 1272
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "agent",
+      "passed": false,
+      "problems": [
+        "missing_expected_action",
+        "unexpected_action_or_category",
+        "wrong_issue_or_mail_count",
+        "wrong_recipients_or_action_count",
+        "wrong_ticket_count"
+      ],
+      "trace": "../live-comparison-20261016T223012500365Z/agent-mail-03.json",
+      "expected": "logistics",
+      "actual": "unsupported_case",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 0,
+        "elapsed_seconds": 0.856,
+        "tokens": null,
+        "actual_models": [],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": [
+        {
+          "error": "Model HTTP 429: request rate limit reached; check free quota before another inference",
+          "http_status": 429
+        }
+      ]
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-03.json",
+      "expected": "logistics",
+      "actual": "logistics",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 16.492,
+        "tokens": {
+          "completion_tokens": 319,
+          "prompt_tokens": 9344,
+          "total_tokens": 9663
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-04",
+      "path": "existing_ticket",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-04.json",
+      "expected": "sergey",
+      "actual": "sergey",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 4,
+        "elapsed_seconds": 4.973,
+        "tokens": {
+          "completion_tokens": 73,
+          "prompt_tokens": 1196,
+          "total_tokens": 1269
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-04",
+      "path": "existing_ticket",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-04.json",
+      "expected": "sergey",
+      "actual": "sergey",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 25.378,
+        "tokens": {
+          "completion_tokens": 286,
+          "prompt_tokens": 12278,
+          "total_tokens": 12564
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 1,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-05",
+      "path": "thread_approval",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-05.json",
+      "expected": "sales_north",
+      "actual": "sales_north",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 5,
+        "elapsed_seconds": 4.556,
+        "tokens": {
+          "completion_tokens": 65,
+          "prompt_tokens": 1306,
+          "total_tokens": 1371
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-05",
+      "path": "thread_approval",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-05.json",
+      "expected": "sales_north",
+      "actual": "sales_north",
+      "metrics": {
+        "model_calls": 8,
+        "tool_calls": 7,
+        "elapsed_seconds": 40.205,
+        "tokens": {
+          "completion_tokens": 594,
+          "prompt_tokens": 26569,
+          "total_tokens": 27163
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 2,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-06",
+      "path": "identity_unverified",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-06.json",
+      "expected": "identity",
+      "actual": "clarification:company_identifier",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 3,
+        "elapsed_seconds": 5.111,
+        "tokens": {
+          "completion_tokens": 68,
+          "prompt_tokens": 1197,
+          "total_tokens": 1265
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-06",
+      "path": "identity_unverified",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-06.json",
+      "expected": "identity",
+      "actual": "identity_unverified",
+      "metrics": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "elapsed_seconds": 14.932,
+        "tokens": {
+          "completion_tokens": 182,
+          "prompt_tokens": 5959,
+          "total_tokens": 6141
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-07",
+      "path": "two_issues",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-07.json",
+      "expected": "sales_orion, order_operations",
+      "actual": "sales_orion, order_operations",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 8,
+        "elapsed_seconds": 4.778,
+        "tokens": {
+          "completion_tokens": 106,
+          "prompt_tokens": 1199,
+          "total_tokens": 1305
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 2
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-07",
+      "path": "two_issues",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-07.json",
+      "expected": "sales_orion, order_operations",
+      "actual": "sales_orion, order_operations",
+      "metrics": {
+        "model_calls": 8,
+        "tool_calls": 7,
+        "elapsed_seconds": 40.237,
+        "tokens": {
+          "completion_tokens": 507,
+          "prompt_tokens": 27905,
+          "total_tokens": 28412
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 1,
+        "human_handoffs": 0,
+        "staff_content_reviews": 2
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-08",
+      "path": "forbidden_external_contract",
+      "mode": "workflow",
+      "passed": true,
+      "problems": [],
+      "trace": "workflow-mail-08.json",
+      "expected": "forbidden",
+      "actual": "forbidden_request",
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 4.973,
+        "tokens": {
+          "completion_tokens": 81,
+          "prompt_tokens": 1205,
+          "total_tokens": 1286
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    },
+    {
+      "message": "mail-08",
+      "path": "forbidden_external_contract",
+      "mode": "agent",
+      "passed": true,
+      "problems": [],
+      "trace": "agent-mail-08.json",
+      "expected": "forbidden",
+      "actual": "forbidden_request",
+      "metrics": {
+        "model_calls": 2,
+        "tool_calls": 1,
+        "elapsed_seconds": 9.925,
+        "tokens": {
+          "completion_tokens": 151,
+          "prompt_tokens": 3408,
+          "total_tokens": 3559
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "model_errors": []
+    }
+  ],
+  "stopped": false,
+  "previous_run": "/Users/andreiiarkovoi/Desktop/AI-Engineer/email-routing-agent/artifacts/live-comparison-20261016T223012500365Z",
+  "request_interval_seconds": 5
+}
