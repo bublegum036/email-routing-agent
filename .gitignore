@@ -1,0 +1,70 @@
+# Secrets and local configuration (keep the public template)
+.env
+.env.*
+!.env.example
+.envrc.local
+secrets/
+.secrets/
+.credentials/
+credentials*.json
+service-account*.json
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Python environments and compiled files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.so
+
+# Python builds and package metadata
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+*.whl
+pip-wheel-metadata/
+
+# Test, coverage, type-checker and lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Local databases and their journal/WAL sidecars
+*.sqlite*
+*.db
+*.db-*
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+/.tmp/
+/tmp/
+/temp/
+artifacts/private/
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini

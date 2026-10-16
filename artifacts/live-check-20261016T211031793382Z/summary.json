@@ -1,0 +1,64 @@
+{
+  "requested_model": "openrouter/free",
+  "live_model": true,
+  "note": "Initial implementation checks, not the final architecture comparison",
+  "checks": [
+    {
+      "mode": "agent",
+      "message": "mail-01",
+      "passed": false,
+      "problems": [
+        "run_failed",
+        "expected_one_routed_issue",
+        "wrong_action_or_recipient",
+        "wrong_saved_mail",
+        "unexpected_human_review"
+      ],
+      "actual_models": [
+        "liquid/lfm-2.5-2.6b:free"
+      ],
+      "trace": "agent-mail-01.json"
+    },
+    {
+      "mode": "agent",
+      "message": "mail-02",
+      "passed": false,
+      "problems": [
+        "expected_one_routed_issue",
+        "wrong_action_or_recipient",
+        "wrong_saved_mail"
+      ],
+      "actual_models": [
+        "cohere/north-mini-code:free",
+        "liquid/lfm-2.5-2.6b:free",
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "trace": "agent-mail-02.json"
+    },
+    {
+      "mode": "workflow",
+      "message": "mail-01",
+      "passed": false,
+      "problems": [
+        "expected_one_routed_issue",
+        "wrong_action_or_recipient",
+        "wrong_saved_mail",
+        "unexpected_human_review"
+      ],
+      "actual_models": [
+        "cohere/north-mini-code:free"
+      ],
+      "trace": "workflow-mail-01.json"
+    },
+    {
+      "mode": "workflow",
+      "message": "mail-02",
+      "passed": true,
+      "problems": [],
+      "actual_models": [
+        "dots-studio/dots-3-note-preview:free"
+      ],
+      "trace": "workflow-mail-02.json"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+[project]
+name = "email-routing-agent"
+version = "0.1.0"
+description = "Local email-routing agent and fixed workflow comparison"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+email-router = "email_router.__main__:main"

@@ -1,0 +1,59 @@
+{
+  "requested_model": "openrouter/free",
+  "live_model": true,
+  "note": "Initial implementation checks, not the final architecture comparison",
+  "checks": [
+    {
+      "mode": "agent",
+      "message": "mail-01",
+      "passed": true,
+      "problems": [],
+      "actual_models": [
+        "cohere/north-mini-code:free",
+        "dots-studio/dots-3-note-preview:free",
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "poolside/laguna-s-2.1:free",
+        "xingchen-agi/xing4.0-29b-a4b:free"
+      ],
+      "trace": "agent-mail-01.json"
+    },
+    {
+      "mode": "agent",
+      "message": "mail-02",
+      "passed": true,
+      "problems": [],
+      "actual_models": [
+        "liquid/lfm-2.5-2.6b:free",
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "nvidia/nemotron-3.5-super-vl:free",
+        "poolside/laguna-s-2.1:free"
+      ],
+      "trace": "agent-mail-02.json"
+    },
+    {
+      "mode": "workflow",
+      "message": "mail-01",
+      "passed": true,
+      "problems": [],
+      "actual_models": [
+        "poolside/laguna-xs-2.1:free"
+      ],
+      "trace": "workflow-mail-01.json"
+    },
+    {
+      "mode": "workflow",
+      "message": "mail-02",
+      "passed": false,
+      "problems": [
+        "expected_one_routed_issue",
+        "wrong_action_or_recipient",
+        "wrong_saved_mail",
+        "unexpected_human_review"
+      ],
+      "actual_models": [
+        "liquid/lfm-2.5-2.6b:free"
+      ],
+      "trace": "workflow-mail-02.json"
+    }
+  ]
+}
