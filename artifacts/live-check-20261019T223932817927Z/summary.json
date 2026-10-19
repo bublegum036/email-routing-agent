@@ -1,0 +1,24 @@
+{
+  "requested_model": "gemini-3.5-flash-lite",
+  "provider": "gemini",
+  "live_model": true,
+  "requested_checks": 4,
+  "note": "Initial implementation checks, not the final architecture comparison",
+  "checks": [
+    {
+      "mode": "agent",
+      "message": "mail-01",
+      "passed": false,
+      "problems": [
+        "run_failed",
+        "no_model_response",
+        "expected_one_routed_issue",
+        "wrong_action_or_recipient",
+        "wrong_saved_mail",
+        "unexpected_human_review"
+      ],
+      "actual_models": [],
+      "trace": "agent-mail-01.json"
+    }
+  ]
+}

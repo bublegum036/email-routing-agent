@@ -1,0 +1,74 @@
+{
+  "live_model": true,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 5,
+  "checks": [
+    {
+      "case": "complete_order",
+      "passed": true,
+      "problems": [],
+      "incomplete_order_observed": null,
+      "actual": [
+        "order_operations"
+      ],
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 16.902,
+        "tokens": {
+          "completion_tokens": 319,
+          "prompt_tokens": 9330,
+          "total_tokens": 9649
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "trace": "complete_order.json",
+      "controller_errors": [],
+      "model_errors": []
+    },
+    {
+      "case": "missing_shipping",
+      "passed": false,
+      "problems": [
+        "controller_error",
+        "expected_controlled_source_handoff",
+        "incomplete_order_not_observed",
+        "order_source_not_checked",
+        "run_failed_instead_of_controlled_handoff"
+      ],
+      "incomplete_order_observed": false,
+      "actual": [
+        "unsupported_case"
+      ],
+      "metrics": {
+        "model_calls": 1,
+        "tool_calls": 0,
+        "elapsed_seconds": 4.081,
+        "tokens": null,
+        "actual_models": [],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "trace": "missing_shipping.json",
+      "controller_errors": [
+        {
+          "error": "Model HTTP 429: request rate limit reached; check free quota before another inference"
+        }
+      ],
+      "model_errors": [
+        {
+          "error": "Model HTTP 429: request rate limit reached; check free quota before another inference",
+          "http_status": 429
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}
