@@ -1,0 +1,75 @@
+{
+  "run": {
+    "id": "run-c50063dd78404b1f",
+    "message_id": "mail-01",
+    "mode": "workflow",
+    "backend": "gemini:gemini-3.5-flash-lite",
+    "started": 1792442992.899729,
+    "config": {
+      "adapter_version": "2",
+      "data_policy_version": "1",
+      "live_model": true,
+      "max_tokens": 2400,
+      "prompt_version": "4",
+      "provider": "gemini",
+      "reasoning_effort": "low",
+      "requested_model": "gemini-3.5-flash-lite",
+      "temperature": 0,
+      "tool_version": "4"
+    }
+  },
+  "message": {
+    "id": "mail-01",
+    "thread_id": "thread-01"
+  },
+  "issues": [
+    {
+      "id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "payload": {
+        "subject": "Содержимое доступно только сотруднику"
+      },
+      "state": "human_review"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "act-faee092b32e7426e",
+      "issue_id": "mail-01:issue-1",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data",
+      "review_id": "review-8a08eca51fa1479a",
+      "status": "applied"
+    }
+  ],
+  "events": [
+    {
+      "kind": "tool",
+      "at": 1792442992.900966,
+      "payload": {
+        "redacted": "staff_only"
+      }
+    },
+    {
+      "kind": "run_end",
+      "at": 1792442992.901351,
+      "payload": {
+        "elapsed_seconds": 0.002,
+        "model_calls": 0,
+        "status": "completed",
+        "tool_calls": 0
+      }
+    }
+  ],
+  "outgoing": [],
+  "reviews": [
+    {
+      "id": "review-8a08eca51fa1479a",
+      "issue_id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data"
+    }
+  ],
+  "redacted_for_staff": true
+}

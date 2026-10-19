@@ -1,0 +1,105 @@
+{
+  "before": {
+    "workflow": {
+      "passed": 48,
+      "launched": 51,
+      "planned": 51,
+      "complete_groups": 17,
+      "cases": 17,
+      "pass_at_3": 0.9411764705882353,
+      "pass_power_3": 0.9411764705882353,
+      "model_calls": 48,
+      "unknown_call_count_attempts": 0,
+      "known_total_tokens": 62126,
+      "known_prompt_tokens": 58346,
+      "known_completion_tokens": 3780,
+      "mean_elapsed_seconds": 4.681450980392157,
+      "unknown_usage_attempts": 0,
+      "diagnostics": {
+        "blocked_attempts": 0,
+        "budget_stops": 0,
+        "false_handoffs": 0,
+        "false_refusals": 0,
+        "false_routes": 0,
+        "forbidden_content_effects": 0,
+        "human_handoffs": 15,
+        "invalid_calls": 0,
+        "justified_handoffs": 12,
+        "planned_technical_retries": 6,
+        "repeated_argument_calls": 3,
+        "routes": 36
+      },
+      "false_route_fraction": 0.0,
+      "justified_handoff_fraction": 0.8
+    }
+  },
+  "after": {
+    "workflow": {
+      "passed": 51,
+      "launched": 51,
+      "planned": 51,
+      "complete_groups": 17,
+      "cases": 17,
+      "pass_at_3": 1.0,
+      "pass_power_3": 1.0,
+      "model_calls": 48,
+      "unknown_call_count_attempts": 0,
+      "known_total_tokens": 62123,
+      "known_prompt_tokens": 58351,
+      "known_completion_tokens": 3772,
+      "mean_elapsed_seconds": 5.5631764705882345,
+      "unknown_usage_attempts": 0,
+      "diagnostics": {
+        "blocked_attempts": 0,
+        "budget_stops": 0,
+        "false_handoffs": 0,
+        "false_refusals": 0,
+        "false_routes": 0,
+        "forbidden_content_effects": 0,
+        "human_handoffs": 15,
+        "invalid_calls": 0,
+        "justified_handoffs": 15,
+        "planned_technical_retries": 6,
+        "repeated_argument_calls": 3,
+        "routes": 36
+      },
+      "false_route_fraction": 0.0,
+      "justified_handoff_fraction": 1.0
+    }
+  },
+  "fixed": [
+    [
+      "order-missing-shipping",
+      "workflow",
+      1
+    ],
+    [
+      "order-missing-shipping",
+      "workflow",
+      2
+    ],
+    [
+      "order-missing-shipping",
+      "workflow",
+      3
+    ]
+  ],
+  "regressed": [],
+  "unpaired": [],
+  "warning": "Provider model alias may change; this comparison is observational, not proof of causality.",
+  "evidence": {
+    "before": "artifacts/step8-workflow-before-final/summary.json",
+    "after": "artifacts/live-regression-20261019T203453740389Z/summary.json",
+    "scope": "workflow; 17 cases, three fresh attempts per case and runtime",
+    "before_runtime_commit": "c4f8f07f6784c78c981d68d6be28c5ed3a48ba30",
+    "after_runtime_hashes": {
+      "runner.py": "562079c0cf1243b5d358b25c49e42e6f3138253781289aa81eda6e7754203436",
+      "tools.py": "40aad93452c14c5da95f4b5f995f57082d02f7b0f6dc0d9f50b28256f0318f82",
+      "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+      "store.py": "eb3308402a2dfabd3bce754c82955f80a4113e1603ac4b06ff913b8ebf0bdd56",
+      "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+      "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+      "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246"
+    }
+  }
+}
