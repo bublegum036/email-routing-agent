@@ -1,0 +1,63 @@
+{
+  "live_model": true,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 5,
+  "checks": [
+    {
+      "case": "not_shipped",
+      "expected": "order_operations",
+      "actual": [
+        "order_operations"
+      ],
+      "passed": true,
+      "problems": [],
+      "trace": "not_shipped.json",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 16.81,
+        "tokens": {
+          "completion_tokens": 310,
+          "prompt_tokens": 9303,
+          "total_tokens": 9613
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "case": "shipped",
+      "expected": "logistics",
+      "actual": [
+        "logistics"
+      ],
+      "passed": true,
+      "problems": [],
+      "trace": "shipped.json",
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "elapsed_seconds": 20.128,
+        "tokens": {
+          "completion_tokens": 324,
+          "prompt_tokens": 9347,
+          "total_tokens": 9671
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    }
+  ],
+  "skipped": []
+}

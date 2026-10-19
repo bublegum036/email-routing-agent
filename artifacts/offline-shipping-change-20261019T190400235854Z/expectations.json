@@ -1,0 +1,11 @@
+{
+  "message": "mail-02",
+  "order": "O-52",
+  "synthetic_only": true,
+  "changed_field": "shipping_status",
+  "cases": {
+    "not_shipped": "order_operations",
+    "shipped": "logistics"
+  },
+  "forbidden": "Other source changes, duplicate tickets, automatic customer-content delivery, invented tracking or delivery dates"
+}

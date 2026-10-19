@@ -1,0 +1,55 @@
+{
+  "live_model": false,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 0,
+  "checks": [
+    {
+      "case": "not_shipped",
+      "expected": "order_operations",
+      "actual": [
+        "order_operations"
+      ],
+      "passed": true,
+      "problems": [],
+      "trace": "not_shipped.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.007,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "case": "shipped",
+      "expected": "logistics",
+      "actual": [
+        "logistics"
+      ],
+      "passed": true,
+      "problems": [],
+      "trace": "shipped.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.007,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    }
+  ],
+  "skipped": []
+}
