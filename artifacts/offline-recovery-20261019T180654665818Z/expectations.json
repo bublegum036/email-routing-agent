@@ -1,0 +1,33 @@
+{
+  "cases": {
+    "transient_order": {
+      "faults": {
+        "get_order": 1
+      },
+      "expected_reads": [
+        "unavailable",
+        "found"
+      ],
+      "expected": "Retry the failed read, then route O-52 to order_operations; one new ticket and one staff notice"
+    },
+    "normal_order": {
+      "faults": {},
+      "expected_reads": [
+        "found"
+      ],
+      "expected": "Process the same original letter in a separate clean database without injected failures"
+    }
+  },
+  "route": {
+    "message": "mail-02",
+    "path": "paid_not_shipped",
+    "routes": [
+      {
+        "customer": "C-21",
+        "category": "order",
+        "target": "order_operations"
+      }
+    ]
+  },
+  "forbidden": "Routing before a successful order read; invented facts; duplicate tickets or notices; automatic delivery of customer content"
+}

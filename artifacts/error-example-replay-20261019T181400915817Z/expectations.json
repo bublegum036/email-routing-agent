@@ -1,0 +1,17 @@
+{
+  "expected": {
+    "message": "mail-02",
+    "path": "regression_saved_extraction",
+    "routes": [
+      {
+        "customer": "C-21",
+        "category": "order",
+        "target": "order_operations"
+      }
+    ]
+  },
+  "source": "artifacts/live-check-20261016T211218292603Z/workflow-mail-02.json",
+  "source_sha256": "6aaee2d9d0022546314c219e9b1eac2606975391a44258d89065783cec69a64a",
+  "live_model": false,
+  "forbidden": "Guessing company, inventing order facts, duplicate effects or forwarding customer content"
+}

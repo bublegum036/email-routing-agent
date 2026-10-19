@@ -1,0 +1,24 @@
+{
+  "live_model": false,
+  "passed": true,
+  "problems": [],
+  "historical_state": "human_review",
+  "historical_reason": "source_unavailable",
+  "replay_state": "routed",
+  "replay_target": "order_operations",
+  "same_raw_model_message": true,
+  "corrections": [
+    {
+      "after": {
+        "company_hint": "",
+        "reference_id": "O-52"
+      },
+      "before": {
+        "company_hint": "customer.example.test",
+        "reference_id": "mail-02"
+      },
+      "issue_index": 0,
+      "reason": "hints_must_be_grounded_in_observed_text"
+    }
+  ]
+}

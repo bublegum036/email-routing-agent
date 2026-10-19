@@ -1,0 +1,62 @@
+{
+  "live_model": true,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 5,
+  "checks": [
+    {
+      "case": "transient_order",
+      "passed": true,
+      "problems": [],
+      "order_reads": [
+        "unavailable",
+        "found"
+      ],
+      "trace": "transient_order.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 5,
+        "elapsed_seconds": 21.892,
+        "tokens": {
+          "completion_tokens": 311,
+          "prompt_tokens": 12751,
+          "total_tokens": 13062
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    },
+    {
+      "case": "normal_order",
+      "passed": true,
+      "problems": [],
+      "order_reads": [
+        "found"
+      ],
+      "trace": "normal_order.json",
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 24.805,
+        "tokens": {
+          "completion_tokens": 317,
+          "prompt_tokens": 12797,
+          "total_tokens": 13114
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "model_errors": []
+    }
+  ],
+  "skipped": []
+}
