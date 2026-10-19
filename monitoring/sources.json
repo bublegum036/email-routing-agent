@@ -1,0 +1,6 @@
+{
+  "sources": [
+    {"id": "current", "role": "current", "latest_live": true},
+    {"id": "baseline", "role": "baseline", "directory": "step8-workflow-before-final"}
+  ]
+}

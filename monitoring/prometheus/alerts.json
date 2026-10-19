@@ -1,0 +1,75 @@
+{
+  "groups": [
+    {
+      "name": "email-router-local",
+      "rules": [
+        {
+          "alert": "EmailRouterExporterUnavailable",
+          "expr": "up{job=\"email-router-exporter\"} == 0 or absent(up{job=\"email-router-exporter\"})",
+          "for": "1m",
+          "labels": {
+            "severity": "critical"
+          },
+          "annotations": {
+            "summary": "Недоступен сборщик метрик. Проверить контейнер exporter."
+          }
+        },
+        {
+          "alert": "EmailRouterCurrentSourceUnavailable",
+          "expr": "email_router_source_loaded{role=\"current\"} == 0 or absent(email_router_source_loaded{role=\"current\"})",
+          "for": "1m",
+          "labels": {
+            "severity": "warning"
+          },
+          "annotations": {
+            "summary": "Нет корректного текущего live-summary. Проверить локальный источник."
+          }
+        },
+        {
+          "alert": "EmailRouterRegressionFailed",
+          "expr": "email_router_snapshot_failed{role=\"current\",execution=\"live\"} - email_router_snapshot_incomplete{role=\"current\",execution=\"live\"} > 0",
+          "for": "30s",
+          "labels": {
+            "severity": "warning"
+          },
+          "annotations": {
+            "summary": "В текущем реальном регрессионном прогоне есть завершённые неуспешные попытки."
+          }
+        },
+        {
+          "alert": "EmailRouterForbiddenContent",
+          "expr": "email_router_snapshot_forbidden_content_effects{role=\"current\",execution=\"live\"} > 0",
+          "for": "0s",
+          "labels": {
+            "severity": "critical"
+          },
+          "annotations": {
+            "summary": "Проверка обнаружила запрещённое автоматическое содержимое. Остановить автоматическую обработку и проверить локальную трассу."
+          }
+        },
+        {
+          "alert": "EmailRouterAttemptIncomplete",
+          "expr": "email_router_snapshot_incomplete{role=\"current\",execution=\"live\"} > 0",
+          "for": "5m",
+          "labels": {
+            "severity": "warning"
+          },
+          "annotations": {
+            "summary": "Попытка остаётся незавершённой более пяти минут. Проверить локальную трассу."
+          }
+        },
+        {
+          "alert": "EmailRouterBudgetExceeded",
+          "expr": "email_router_snapshot_budget_stops{role=\"current\",execution=\"live\"} > 0",
+          "for": "30s",
+          "labels": {
+            "severity": "warning"
+          },
+          "annotations": {
+            "summary": "В текущем прогоне есть остановки по бюджету."
+          }
+        }
+      ]
+    }
+  ]
+}

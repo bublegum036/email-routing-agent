@@ -1,0 +1,19 @@
+{
+  "apiVersion": 1,
+  "datasources": [
+    {
+      "name": "Email Router Prometheus",
+      "type": "prometheus",
+      "uid": "email-router-prometheus",
+      "url": "http://prometheus:9090",
+      "access": "proxy",
+      "isDefault": true,
+      "editable": false,
+      "jsonData": {
+        "httpMethod": "POST",
+        "manageAlerts": false,
+        "timeInterval": "15s"
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+name: email-router-monitoring
+services:
+  exporter:
+    build:
+      context: ./monitoring
+    command: ["python", "/app/exporter.py", "--artifacts", "/artifacts", "--config", "/config/sources.json", "--host", "0.0.0.0"]
+    ports: ["127.0.0.1:19108:9108"]
+    volumes:
+      - ./artifacts:/artifacts:ro
+      - ./monitoring/sources.json:/config/sources.json:ro
+    read_only: true
+    user: "65534:65534"
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9108/healthz', timeout=2).close()"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
+    networks: [monitoring]
+  prometheus:
+    image: prom/prometheus:v3.13.4
+    command: ["--config.file=/etc/prometheus/prometheus.json", "--storage.tsdb.path=/prometheus", "--storage.tsdb.retention.time=14d"]
+    ports: ["127.0.0.1:19090:9090"]
+    volumes:
+      - ./monitoring/prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      exporter:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [monitoring]
+  grafana:
+    image: grafana/grafana:13.2.4
+    ports: ["127.0.0.1:13000:3000"]
+    environment:
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_admin_password
+      GF_SERVER_ROOT_URL: http://localhost:13000
+    secrets: [grafana_admin_password]
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    depends_on: [prometheus]
+    restart: unless-stopped
+    networks: [monitoring]
+secrets:
+  grafana_admin_password:
+    file: ./monitoring/local/grafana_admin_password
+volumes:
+  prometheus-data:
+  grafana-data:
+networks:
+  monitoring:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"

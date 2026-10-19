@@ -1,0 +1,17 @@
+{
+  "apiVersion": 1,
+  "providers": [
+    {
+      "name": "email-router",
+      "orgId": 1,
+      "folder": "Email router",
+      "type": "file",
+      "disableDeletion": false,
+      "editable": false,
+      "updateIntervalSeconds": 15,
+      "options": {
+        "path": "/var/lib/grafana/dashboards"
+      }
+    }
+  ]
+}

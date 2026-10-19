@@ -1,0 +1,895 @@
+{
+  "uid": "email-router-local",
+  "title": "Email router — локальный стенд",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": false,
+  "refresh": "15s",
+  "timezone": "browser",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "source",
+        "type": "custom",
+        "query": "current,baseline",
+        "current": {
+          "text": "current",
+          "value": "current"
+        },
+        "options": []
+      },
+      {
+        "name": "mode",
+        "type": "custom",
+        "query": "workflow,agent",
+        "current": {
+          "text": "workflow",
+          "value": "workflow"
+        },
+        "options": []
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "text",
+      "title": "Границы наблюдения",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 4
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "Снимки регрессионного стенда, не производственная почта. **current** — последний live-regression; **baseline** — старая версия. Пустой agent означает отсутствие такого прогона. Успех и forbidden — результаты программного проверяющего кода. Токены показаны как известная сумма; неизвестный расход вынесен отдельно. [Правила тревог](http://localhost:19090/alerts). Внешние уведомления не подключены."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Источник загружен (1 = да)",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_source_loaded{source=\"$source\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "Запущено попыток",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 4,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_attempts{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "Успешно",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 4,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_passed{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Неуспешно, включая незавершённые",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 4,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_failed{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "pass@3",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_pass_at_3_ratio{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "pass^3",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 9,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_pass_power_3_ratio{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "Ещё не запущено",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 9,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_pending_attempts{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 9,
+      "title": "Незавершённые",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 9,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_incomplete{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 10,
+      "title": "Среднее время с паузами",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_elapsed_seconds_sum{source=\"$source\",mode=\"$mode\"} / email_router_snapshot_elapsed_seconds_count{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 11,
+      "title": "Вызовы модели — известное число",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 14,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_model_calls{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 12,
+      "title": "Токены — известная сумма",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 14,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_total_tokens{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 13,
+      "title": "Попытки с неизвестным расходом",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 14,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_unknown_usage_attempts{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 14,
+      "title": "Маршрутизации",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 19,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_routes{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 15,
+      "title": "Передачи сотруднику",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 19,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_human_handoffs{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 16,
+      "title": "Оправданные передачи",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 19,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_justified_handoffs{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 17,
+      "title": "Запрещённое содержимое",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 19,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_forbidden_content_effects{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 18,
+      "title": "Неверные маршруты",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 24,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_false_routes{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 19,
+      "title": "Блокировки",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 24,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_blocked_attempts{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 20,
+      "title": "Технические повторы",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 24,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_planned_technical_retries{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 21,
+      "title": "Повторения аргументов",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 24,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_repeated_argument_calls{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 22,
+      "title": "Активные локальные тревоги",
+      "type": "table",
+      "gridPos": {
+        "x": 0,
+        "y": 29,
+        "w": 24,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ALERTS{alertstate=\"firing\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 23,
+      "title": "Попытки с неизвестной диагностикой",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 34,
+        "w": 12,
+        "h": 5
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "email-router-prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "email_router_snapshot_unknown_diagnostics_attempts{source=\"$source\",mode=\"$mode\"}",
+          "instant": true,
+          "legendFormat": "{{source}} / {{mode}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    }
+  ],
+  "tags": [
+    "email-router",
+    "local",
+    "regression"
+  ]
+}
