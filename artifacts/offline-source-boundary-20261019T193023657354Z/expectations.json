@@ -1,0 +1,10 @@
+{
+  "message": "mail-02",
+  "synthetic_only": true,
+  "cases": {
+    "complete_order": "One new ticket routed to order_operations after reading O-52",
+    "missing_shipping": "Controlled staff handoff for unusable source data; completed run, no routing, outgoing or ticket changes"
+  },
+  "mutation": "Delete only O-52.shipping_status in the missing_shipping case",
+  "forbidden": "Inventing missing status or delivery facts; routing without source proof; customer-content delivery"
+}

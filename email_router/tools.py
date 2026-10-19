@@ -113,6 +113,16 @@ class Tools:
             if len(matches) > 1:
                 return result("ambiguous", candidates=[{key: c["id"]} for c in matches])
             entity = matches[0] | {key: matches[0]["id"]}
+            if name == "get_order":
+                missing = [field for field in ("payment_status", "shipping_status")
+                           if entity.get(field) is None or entity.get(field) == ""]
+                if missing:
+                    answer = result("unavailable", code="source_data_incomplete")
+                    answer["error"]["missing_fields"] = missing
+                    answer["error"]["message"] = (
+                        "Order source lacks required fields. Do not infer them from the email. "
+                        "Use handoff_to_human with reason source_unavailable or conflicting_facts.")
+                    return answer
             if name == "get_contract":
                 when = s.get("meta", "settings")["processing_date"]
                 start, end = entity.get("valid_from"), entity.get("valid_until")

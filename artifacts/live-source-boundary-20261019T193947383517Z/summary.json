@@ -1,0 +1,73 @@
+{
+  "live_model": true,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 5,
+  "checks": [
+    {
+      "case": "complete_order",
+      "passed": true,
+      "problems": [],
+      "incomplete_order_observed": null,
+      "actual": [
+        "order_operations"
+      ],
+      "metrics": {
+        "model_calls": 6,
+        "tool_calls": 5,
+        "elapsed_seconds": 26.868,
+        "tokens": {
+          "completion_tokens": 337,
+          "prompt_tokens": 16173,
+          "total_tokens": 16510
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 1,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "trace": "complete_order.json",
+      "controller_errors": [],
+      "model_errors": []
+    },
+    {
+      "case": "missing_shipping",
+      "passed": false,
+      "problems": [
+        "controller_error",
+        "expected_controlled_source_handoff",
+        "run_failed_instead_of_controlled_handoff"
+      ],
+      "incomplete_order_observed": true,
+      "actual": [
+        "unsupported_case"
+      ],
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 24.723,
+        "tokens": {
+          "completion_tokens": 316,
+          "prompt_tokens": 12787,
+          "total_tokens": 13103
+        },
+        "actual_models": [
+          "gemini-3.5-flash-lite"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "trace": "missing_shipping.json",
+      "controller_errors": [
+        {
+          "error": "'shipping_status'"
+        }
+      ],
+      "model_errors": []
+    }
+  ],
+  "skipped": []
+}

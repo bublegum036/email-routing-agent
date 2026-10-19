@@ -120,7 +120,8 @@ class Runner:
             raise ModelError("budget_exhausted")
         self.tool_calls += 1
         answer = self.tools.call(name, args)
-        if name in READS and answer["status"] == "unavailable" and self.tool_calls < 24:
+        if (name in READS and answer["status"] == "unavailable" and self.tool_calls < 24
+                and (answer.get("error") or {}).get("code") != "source_data_incomplete"):
             if time.time() + 0.25 < self.started + 115:
                 time.sleep(0.25)
                 self.tool_calls += 1
@@ -171,7 +172,7 @@ class Runner:
             self.run_id, self.started = row["id"], row["started"]
         else:
             self.run_id, self.started = uid("run"), time.time()
-            config = {"prompt_version": "4", "tool_version": "4", "data_policy_version": "1", "live_model": self.model.is_live,
+            config = {"prompt_version": "4", "tool_version": "5", "data_policy_version": "1", "live_model": self.model.is_live,
                       "requested_model": self.model.model, "provider": getattr(self.model, "provider", "offline"),
                       "adapter_version": "2",
                       **getattr(self.model, "generation_config", {"temperature": 0, "max_tokens": 2400})}
