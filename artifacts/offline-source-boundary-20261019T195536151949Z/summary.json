@@ -1,0 +1,57 @@
+{
+  "live_model": false,
+  "mode": "agent",
+  "requested_checks": 2,
+  "request_interval_seconds": 0,
+  "checks": [
+    {
+      "case": "complete_order",
+      "passed": true,
+      "problems": [],
+      "incomplete_order_observed": null,
+      "actual": [
+        "order_operations"
+      ],
+      "metrics": {
+        "model_calls": 5,
+        "tool_calls": 4,
+        "elapsed_seconds": 0.011,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 0,
+        "staff_content_reviews": 1
+      },
+      "trace": "complete_order.json",
+      "controller_errors": [],
+      "model_errors": []
+    },
+    {
+      "case": "missing_shipping",
+      "passed": true,
+      "problems": [],
+      "incomplete_order_observed": true,
+      "actual": [
+        "source_unavailable"
+      ],
+      "metrics": {
+        "model_calls": 4,
+        "tool_calls": 3,
+        "elapsed_seconds": 0.008,
+        "tokens": null,
+        "actual_models": [
+          "scripted-development-fixture"
+        ],
+        "blocked_attempts": 0,
+        "human_handoffs": 1,
+        "staff_content_reviews": 0
+      },
+      "trace": "missing_shipping.json",
+      "controller_errors": [],
+      "model_errors": []
+    }
+  ],
+  "skipped": []
+}

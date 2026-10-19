@@ -9,6 +9,7 @@ from .schemas import ISSUE_SCHEMA, READS, chat_tools, validate
 from .store import encode, uid
 from .tools import Tools
 from .policy import cloud_context_allowed
+from .tracing import run_versions
 
 
 BUSINESS = """Ты диспетчер локального стенда корпоративной сервисной компании.
@@ -105,27 +106,42 @@ class Runner:
         if self.model_calls >= 16 or time.time() >= self.started + 115:
             raise ModelError("budget_exhausted")
         # Persist attempt before network access so restart cannot reset the count.
-        self.store.event(self.run_id, "model_request", {"messages": messages, "tools": tools})
+        started, timer = time.time(), time.monotonic()
+        metadata = {"call_id": uid("llm"), "started_at": started,
+                    "model_role": "extractor" if tools[0]["function"]["name"] == "register_issues" else "planner",
+                    "requested_model": self.model.model}
+        self.store.event(self.run_id, "model_request", {"messages": messages, "tools": tools}, metadata=metadata)
         self.model_calls += 1
+        self._model_call_error = None
         try:
             answer = self.model.complete(messages, tools, timeout=min(30, self.started + 115 - time.time()))
+            if not isinstance(answer, dict) or not isinstance(answer.get("message"), dict):
+                raise TypeError("Invalid model adapter response")
         except ModelError as exc:
-            self.store.event(self.run_id, "model_error", {"error": str(exc), "http_status": exc.http_status})
+            self.store.event(self.run_id, "model_error", {"error": str(exc), "http_status": exc.http_status},
+                             metadata=metadata | {"ended_at": time.time(), "duration_seconds": time.monotonic() - timer})
             raise
-        self.store.event(self.run_id, "model_response", answer)
+        except Exception as exc:
+            self._model_call_error = exc
+            self.store.event(self.run_id, "model_error", {
+                "error": "Model response could not be processed", "error_type": type(exc).__name__, "http_status": None},
+                metadata=metadata | {"ended_at": time.time(), "duration_seconds": time.monotonic() - timer})
+            raise
+        self.store.event(self.run_id, "model_response", answer, metadata=metadata | {
+            "ended_at": time.time(), "duration_seconds": time.monotonic() - timer, "actual_model": answer.get("model")})
         return answer["message"]
 
-    def call(self, name, args):
+    def call(self, name, args, *, provider_call_id=None):
         if self.tool_calls >= 24 or time.time() >= self.started + 115:
             raise ModelError("budget_exhausted")
         self.tool_calls += 1
-        answer = self.tools.call(name, args)
+        answer = self.tools.call(name, args, provider_call_id=provider_call_id)
         if (name in READS and answer["status"] == "unavailable" and self.tool_calls < 24
                 and (answer.get("error") or {}).get("code") != "source_data_incomplete"):
             if time.time() + 0.25 < self.started + 115:
                 time.sleep(0.25)
                 self.tool_calls += 1
-                answer = self.tools.call(name, args)
+                answer = self.tools.call(name, args, provider_call_id=provider_call_id)
         return answer
 
     def extract(self, history=None):
@@ -175,10 +191,13 @@ class Runner:
             config = {"prompt_version": "4", "tool_version": "5", "data_policy_version": "1", "live_model": self.model.is_live,
                       "requested_model": self.model.model, "provider": getattr(self.model, "provider", "offline"),
                       "adapter_version": "2",
-                      **getattr(self.model, "generation_config", {"temperature": 0, "max_tokens": 2400})}
+                      **getattr(self.model, "generation_config", {"temperature": 0, "max_tokens": 2400}),
+                      "case_id": message_id, "faults": dict(self.faults or {}),
+                      **run_versions(self.store, self.model, self.mode)}
             with self.store.db:
                 self.store.db.execute("INSERT INTO runs VALUES(?,?,?,?,?,?)", (self.run_id,
                     message_id, self.mode, self.model.label, self.started, encode(config)))
+            self.store.event(self.run_id, "run_start", {"message": self.store.get("messages", message_id)})
         self.tools = Tools(self.store, self.run_id, message_id, self.faults)
         self.model_calls = self.store.db.execute(
             "SELECT COUNT(*) FROM events WHERE run_id=? AND kind='model_request'", (self.run_id,)).fetchone()[0]
@@ -200,12 +219,14 @@ class Runner:
                 for issue in self.pending():
                     self.workflow(issue)
         except (ModelError, ValueError, KeyError, TypeError) as exc:
-            self.store.event(self.run_id, "controller_error", {"error": str(exc)})
+            error = ("Model call failed (" + type(exc).__name__ + ")"
+                     if exc is getattr(self, "_model_call_error", None) else str(exc))
+            self.store.event(self.run_id, "controller_error", {"error": error})
             if not self.store.issues(message_id):
                 self.store.register(self.tools.message, [{"category": "unknown", "quote": self.tools.message["text"],
                                     "subject": "Ручной разбор исходного письма", "reference_id": "", "company_hint": ""}])
             for issue in self.pending():
-                self.handoff(issue, "unsupported_case", str(exc), reserve=True)
+                self.handoff(issue, "unsupported_case", error, reserve=True)
         # Pending after a failed final write is a failure, never a successful handoff.
         error = self.store.db.execute("SELECT 1 FROM events WHERE run_id=? AND kind='controller_error' LIMIT 1",
                                        (self.run_id,)).fetchone()
@@ -243,7 +264,7 @@ class Runner:
                 if not self.pending():
                     answer = {"status": "blocked", "error": {"code": "message_already_completed"}}
                 else:
-                    answer = self.call(name, args)
+                    answer = self.call(name, args, provider_call_id=call["id"])
                 exchange.append({"role": "tool", "tool_call_id": call["id"], "content": encode(answer)})
                 if answer["status"] in {"invalid_arguments", "blocked", "conflict"}:
                     key = (name, (answer.get("error") or {}).get("code"))

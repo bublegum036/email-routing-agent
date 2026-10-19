@@ -1,0 +1,45 @@
+{
+  "note": "Read-only JSONL projections; old fields remain unknown. Fresh model calls in these examples are OFFLINE fixtures only.",
+  "traces": [
+    {
+      "source": "artifacts/live-source-boundary-20261019T193947383517Z/missing_shipping.json",
+      "source_sha256": "ea57c5c0f05d7c9ae97abd2c695fc05e8cc0cb7b69ff93a505947b9218523d7e",
+      "run_id": "run-80e0524c6e814d1d",
+      "live_model": true,
+      "jsonl": "01-agent-missing_shipping.jsonl",
+      "records": 22
+    },
+    {
+      "source": "artifacts/offline-source-boundary-20261019T195646169067Z/complete_order.json",
+      "source_sha256": "150fd0e3e195bc13c08d56d594a195476c9c4e820b8773e6a247577fba5cb6b9",
+      "run_id": "run-ed0075aad8e74a51",
+      "live_model": false,
+      "jsonl": "02-agent-complete_order.jsonl",
+      "records": 27
+    },
+    {
+      "source": "artifacts/offline-source-boundary-20261019T195646169067Z/missing_shipping.json",
+      "source_sha256": "9060131149c739eb519269857c9078edf4e63df7c9c8a7583b484b09fe9a099f",
+      "run_id": "run-16e761cff687461c",
+      "live_model": false,
+      "jsonl": "03-agent-missing_shipping.jsonl",
+      "records": 22
+    },
+    {
+      "source": "artifacts/offline-source-boundary-20261019T195646281803Z/complete_order.json",
+      "source_sha256": "0a0281e88864529382520b6bfadd21c9d6b012653d612d1833b8f0b62aa06415",
+      "run_id": "run-dbbe622012984ce2",
+      "live_model": false,
+      "jsonl": "04-workflow-complete_order.jsonl",
+      "records": 17
+    },
+    {
+      "source": "artifacts/offline-source-boundary-20261019T195646281803Z/missing_shipping.json",
+      "source_sha256": "8cf6d18d9c7b668ff02bb305481a4c5184406489d3ed024b4ed8daf4c95d7eae",
+      "run_id": "run-428bd76fc9bc478c",
+      "live_model": false,
+      "jsonl": "05-workflow-missing_shipping.jsonl",
+      "records": 15
+    }
+  ]
+}

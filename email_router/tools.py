@@ -3,6 +3,7 @@
 import json
 import re
 import sqlite3
+import time
 from datetime import date
 from email.utils import parseaddr
 
@@ -390,7 +391,10 @@ class Tools:
             s.db.rollback()
             raise
 
-    def call(self, name, arguments):
+    def call(self, name, arguments, *, provider_call_id=None):
+        timer = time.monotonic()
+        metadata = {"call_id": uid("tool"), "provider_call_id": provider_call_id, "started_at": time.time()}
+        self.store.event(self.run_id, "tool_request", {"name": name, "arguments": arguments}, metadata=metadata)
         try:
             if name not in SPECS:
                 raise ValueError("Unknown tool")
@@ -400,6 +404,10 @@ class Tools:
             answer = result("invalid_arguments", code=str(exc))
         except sqlite3.Error:
             answer = result("unavailable", code="storage_error")
+        except Exception as exc:
+            self.store.event(self.run_id, "tool_error", {"name": name, "error_type": type(exc).__name__},
+                             metadata=metadata | {"ended_at": time.time(), "duration_seconds": time.monotonic() - timer})
+            raise
         if answer["status"] == "blocked":
             instructions = {
                 "verified_customer_required": "Include the evidence_id of the successful resolve_customer for this customer, not only the order evidence.",
@@ -413,5 +421,6 @@ class Tools:
             if code in instructions:
                 answer["error"]["message"] = instructions[code]
                 answer["available_evidence"] = self.available_evidence()
-        self.store.event(self.run_id, "tool", {"name": name, "arguments": arguments, "result": answer})
+        self.store.event(self.run_id, "tool", {"name": name, "arguments": arguments, "result": answer},
+                         metadata=metadata | {"ended_at": time.time(), "duration_seconds": time.monotonic() - timer})
         return answer

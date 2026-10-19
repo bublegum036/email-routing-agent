@@ -5,7 +5,7 @@ import sqlite3
 import time
 import uuid
 from pathlib import Path
-from .policy import cloud_context_allowed, public_report
+from .policy import cloud_context_allowed, critical_record, public_report
 
 
 def encode(value):
@@ -45,8 +45,12 @@ class Store:
           id TEXT PRIMARY KEY, message_id TEXT NOT NULL, payload TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS events(
           seq INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL,
-          at REAL NOT NULL, kind TEXT NOT NULL, payload TEXT NOT NULL);
+          at REAL NOT NULL, kind TEXT NOT NULL, payload TEXT NOT NULL,
+          metadata TEXT NOT NULL DEFAULT '{}');
         """)
+        if "metadata" not in {r[1] for r in self.db.execute("PRAGMA table_info(events)")}:
+            self.db.execute("ALTER TABLE events ADD COLUMN metadata TEXT NOT NULL DEFAULT '{}'")
+            self.db.commit()
 
     def close(self):
         self.db.close()
@@ -76,10 +80,10 @@ class Store:
         return [json.loads(row[0]) for row in self.db.execute(
             "SELECT payload FROM entities WHERE kind=? ORDER BY id", (kind,))]
 
-    def event(self, run_id, kind, payload):
+    def event(self, run_id, kind, payload, *, metadata=None):
         with self.db:
-            self.db.execute("INSERT INTO events(run_id,at,kind,payload) VALUES(?,?,?,?)",
-                            (run_id, time.time(), kind, encode(payload)))
+            self.db.execute("INSERT INTO events(run_id,at,kind,payload,metadata) VALUES(?,?,?,?,?)",
+                            (run_id, time.time(), kind, encode(payload), encode(metadata or {})))
 
     def issues(self, message_id):
         return [dict(row) | {"payload": json.loads(row["payload"])}
@@ -113,17 +117,26 @@ class Store:
     def report(self, run_id):
         run = dict(self.db.execute("SELECT * FROM runs WHERE id=?", (run_id,)).fetchone())
         run["config"] = json.loads(run.pop("payload"))
-        message = self.get("messages", run["message_id"])
+        start = self.db.execute("SELECT payload FROM events WHERE run_id=? AND kind='run_start' ORDER BY seq LIMIT 1",
+                                (run_id,)).fetchone()
+        message = json.loads(start[0])["message"] if start else self.get("messages", run["message_id"])
         report = {
-            "run": run, "message": message, "issues": self.issues(message["id"]),
+            "run": run, "message": message,
+            "message_snapshot_source": "run_start" if start else "current_store_fallback",
+            "issues": self.issues(message["id"]),
             "actions": [json.loads(r[0]) for r in self.db.execute(
                 "SELECT a.receipt FROM actions a JOIN issues i ON i.id=a.issue_id WHERE i.message_id=?",
                 (message["id"],))],
-            "events": [{"kind": r["kind"], "at": r["at"], "payload": json.loads(r["payload"])}
-                       for r in self.db.execute("SELECT * FROM events WHERE run_id=? ORDER BY seq", (run_id,))],
+            "events": [{**json.loads(r["metadata"]), "event_index": index,
+                        "run_id": run_id, "case_id": run["config"].get("case_id", message["id"]),
+                        **{key: run["config"].get(key) for key in (
+                            "prompt_version", "tool_version", "code_version", "dataset_version", "model_config_version")},
+                        "kind": r["kind"], "at": r["at"], "payload": json.loads(r["payload"])}
+                       for index, r in enumerate(self.db.execute(
+                           "SELECT * FROM events WHERE run_id=? ORDER BY seq", (run_id,)), 1)],
             "outgoing": [json.loads(r[0]) for r in self.db.execute(
                 "SELECT payload FROM outgoing WHERE message_id=?", (message["id"],))],
             "reviews": [json.loads(r[0]) for r in self.db.execute(
                 "SELECT payload FROM reviews WHERE message_id=?", (message["id"],))],
         }
-        return report if cloud_context_allowed(self) else public_report(report)
+        return report if cloud_context_allowed(self) and not critical_record(message, "messages") else public_report(report)
