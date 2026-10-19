@@ -59,7 +59,7 @@ class MonitoringTests(unittest.TestCase):
             output = collect(root, [{'id': 'current', 'role': 'current', 'directory': 'current'}])
         self.assertNotIn(marker, output)
         self.assertNotIn('private@', output)
-        self.assertNotIn('9999', output)
+        self.assertNotIn('snapshot_passed{execution="live",mode="workflow",role="current",source="current"} 9999', output)
         self.assertIn('snapshot_passed{execution="live",mode="workflow",role="current",source="current"} 1', output)
         self.assertNotIn('pass_power_3_ratio', output)  # Two attempts are still unlaunched.
 

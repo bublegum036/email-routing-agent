@@ -1,0 +1,570 @@
+{
+  "live_model": true,
+  "workflow": {
+    "passed": 51,
+    "launched": 51,
+    "planned": 51,
+    "complete_groups": 17,
+    "cases": 17,
+    "pass_at_3": 1.0,
+    "pass_power_3": 1.0,
+    "model_calls": 48,
+    "unknown_call_count_attempts": 0,
+    "known_total_tokens": 62123,
+    "known_prompt_tokens": 58351,
+    "known_completion_tokens": 3772,
+    "mean_elapsed_seconds": 5.5631764705882345,
+    "unknown_usage_attempts": 0,
+    "diagnostics": {
+      "blocked_attempts": 0,
+      "budget_stops": 0,
+      "false_handoffs": 0,
+      "false_refusals": 0,
+      "false_routes": 0,
+      "forbidden_content_effects": 0,
+      "human_handoffs": 15,
+      "invalid_calls": 0,
+      "justified_handoffs": 15,
+      "planned_technical_retries": 6,
+      "repeated_argument_calls": 3,
+      "routes": 36
+    },
+    "false_route_fraction": 0.0,
+    "justified_handoff_fraction": 1.0
+  },
+  "agent": {
+    "passed": 51,
+    "launched": 51,
+    "planned": 51,
+    "complete_groups": 17,
+    "cases": 17,
+    "pass_at_3": 1.0,
+    "pass_power_3": 1.0,
+    "model_calls": 232,
+    "unknown_call_count_attempts": 0,
+    "known_total_tokens": 626709,
+    "known_prompt_tokens": 611979,
+    "known_completion_tokens": 14518,
+    "mean_elapsed_seconds": 22.904450980392156,
+    "unknown_usage_attempts": 0,
+    "diagnostics": {
+      "blocked_attempts": 15,
+      "budget_stops": 0,
+      "false_handoffs": 0,
+      "false_refusals": 0,
+      "false_routes": 0,
+      "forbidden_content_effects": 0,
+      "human_handoffs": 17,
+      "invalid_calls": 10,
+      "justified_handoffs": 17,
+      "planned_technical_retries": 8,
+      "repeated_argument_calls": 0,
+      "routes": 36
+    },
+    "false_route_fraction": 0.0,
+    "justified_handoff_fraction": 1.0
+  },
+  "actual_models": [
+    "gemini-3.5-flash-lite"
+  ],
+  "cases": [
+    {
+      "case_id": "mail-01",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 4088,
+        "problems": {},
+        "traces": [
+          "mail-01-workflow-1/trace.jsonl",
+          "mail-01-workflow-2/trace.jsonl",
+          "mail-01-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 26,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 88245,
+        "problems": {},
+        "traces": [
+          "mail-01-agent-1/trace.jsonl",
+          "mail-01-agent-2/trace.jsonl",
+          "mail-01-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-02",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3816,
+        "problems": {},
+        "traces": [
+          "mail-02-workflow-1/trace.jsonl",
+          "mail-02-workflow-2/trace.jsonl",
+          "mail-02-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 13,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 32368,
+        "problems": {},
+        "traces": [
+          "mail-02-agent-1/trace.jsonl",
+          "mail-02-agent-2/trace.jsonl",
+          "mail-02-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-03",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3817,
+        "problems": {},
+        "traces": [
+          "mail-03-workflow-1/trace.jsonl",
+          "mail-03-workflow-2/trace.jsonl",
+          "mail-03-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 17,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 46106,
+        "problems": {},
+        "traces": [
+          "mail-03-agent-1/trace.jsonl",
+          "mail-03-agent-2/trace.jsonl",
+          "mail-03-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-04",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3808,
+        "problems": {},
+        "traces": [
+          "mail-04-workflow-1/trace.jsonl",
+          "mail-04-workflow-2/trace.jsonl",
+          "mail-04-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 12,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 28260,
+        "problems": {},
+        "traces": [
+          "mail-04-agent-1/trace.jsonl",
+          "mail-04-agent-2/trace.jsonl",
+          "mail-04-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-05",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 4114,
+        "problems": {},
+        "traces": [
+          "mail-05-workflow-1/trace.jsonl",
+          "mail-05-workflow-2/trace.jsonl",
+          "mail-05-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 18,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 49862,
+        "problems": {},
+        "traces": [
+          "mail-05-agent-1/trace.jsonl",
+          "mail-05-agent-2/trace.jsonl",
+          "mail-05-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-06",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3799,
+        "problems": {},
+        "traces": [
+          "mail-06-workflow-1/trace.jsonl",
+          "mail-06-workflow-2/trace.jsonl",
+          "mail-06-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 9,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 18349,
+        "problems": {},
+        "traces": [
+          "mail-06-agent-1/trace.jsonl",
+          "mail-06-agent-2/trace.jsonl",
+          "mail-06-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-07",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3937,
+        "problems": {},
+        "traces": [
+          "mail-07-workflow-1/trace.jsonl",
+          "mail-07-workflow-2/trace.jsonl",
+          "mail-07-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 17,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 51572,
+        "problems": {},
+        "traces": [
+          "mail-07-agent-1/trace.jsonl",
+          "mail-07-agent-2/trace.jsonl",
+          "mail-07-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-08",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3856,
+        "problems": {},
+        "traces": [
+          "mail-08-workflow-1/trace.jsonl",
+          "mail-08-workflow-2/trace.jsonl",
+          "mail-08-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 6,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 10669,
+        "problems": {},
+        "traces": [
+          "mail-08-agent-1/trace.jsonl",
+          "mail-08-agent-2/trace.jsonl",
+          "mail-08-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-09",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 4098,
+        "problems": {},
+        "traces": [
+          "mail-09-workflow-1/trace.jsonl",
+          "mail-09-workflow-2/trace.jsonl",
+          "mail-09-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 21,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 64275,
+        "problems": {},
+        "traces": [
+          "mail-09-agent-1/trace.jsonl",
+          "mail-09-agent-2/trace.jsonl",
+          "mail-09-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-10",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3839,
+        "problems": {},
+        "traces": [
+          "mail-10-workflow-1/trace.jsonl",
+          "mail-10-workflow-2/trace.jsonl",
+          "mail-10-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 15,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 39628,
+        "problems": {},
+        "traces": [
+          "mail-10-agent-1/trace.jsonl",
+          "mail-10-agent-2/trace.jsonl",
+          "mail-10-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-11",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3857,
+        "problems": {},
+        "traces": [
+          "mail-11-workflow-1/trace.jsonl",
+          "mail-11-workflow-2/trace.jsonl",
+          "mail-11-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 18,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 51050,
+        "problems": {},
+        "traces": [
+          "mail-11-agent-1/trace.jsonl",
+          "mail-11-agent-2/trace.jsonl",
+          "mail-11-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "mail-12",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3831,
+        "problems": {},
+        "traces": [
+          "mail-12-workflow-1/trace.jsonl",
+          "mail-12-workflow-2/trace.jsonl",
+          "mail-12-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 8,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 16203,
+        "problems": {},
+        "traces": [
+          "mail-12-agent-1/trace.jsonl",
+          "mail-12-agent-2/trace.jsonl",
+          "mail-12-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "order-transient",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3814,
+        "problems": {},
+        "traces": [
+          "order-transient-workflow-1/trace.jsonl",
+          "order-transient-workflow-2/trace.jsonl",
+          "order-transient-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 13,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 32392,
+        "problems": {},
+        "traces": [
+          "order-transient-agent-1/trace.jsonl",
+          "order-transient-agent-2/trace.jsonl",
+          "order-transient-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "order-unavailable",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3821,
+        "problems": {},
+        "traces": [
+          "order-unavailable-workflow-1/trace.jsonl",
+          "order-unavailable-workflow-2/trace.jsonl",
+          "order-unavailable-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 15,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 40550,
+        "problems": {},
+        "traces": [
+          "order-unavailable-agent-1/trace.jsonl",
+          "order-unavailable-agent-2/trace.jsonl",
+          "order-unavailable-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "order-shipped",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3818,
+        "problems": {},
+        "traces": [
+          "order-shipped-workflow-1/trace.jsonl",
+          "order-shipped-workflow-2/trace.jsonl",
+          "order-shipped-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 12,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 28927,
+        "problems": {},
+        "traces": [
+          "order-shipped-agent-1/trace.jsonl",
+          "order-shipped-agent-2/trace.jsonl",
+          "order-shipped-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "order-missing-shipping",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 3,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 3810,
+        "problems": {},
+        "traces": [
+          "order-missing-shipping-workflow-1/trace.jsonl",
+          "order-missing-shipping-workflow-2/trace.jsonl",
+          "order-missing-shipping-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 12,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 28253,
+        "problems": {},
+        "traces": [
+          "order-missing-shipping-agent-1/trace.jsonl",
+          "order-missing-shipping-agent-2/trace.jsonl",
+          "order-missing-shipping-agent-3/trace.jsonl"
+        ]
+      }
+    },
+    {
+      "case_id": "critical-boundary",
+      "workflow": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 0,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 0,
+        "problems": {},
+        "traces": [
+          "critical-boundary-workflow-1/trace.jsonl",
+          "critical-boundary-workflow-2/trace.jsonl",
+          "critical-boundary-workflow-3/trace.jsonl"
+        ]
+      },
+      "agent": {
+        "passed": 3,
+        "launched": 3,
+        "model_calls": 0,
+        "unknown_call_count_attempts": 0,
+        "known_total_tokens": 0,
+        "problems": {},
+        "traces": [
+          "critical-boundary-agent-1/trace.jsonl",
+          "critical-boundary-agent-2/trace.jsonl",
+          "critical-boundary-agent-3/trace.jsonl"
+        ]
+      }
+    }
+  ],
+  "note": "All launched slots, including failed/interrupted attempts, remain in the denominator. Model alias may change; elapsed time includes pacing.",
+  "sources": {
+    "workflow": "artifacts/live-regression-20261019T203453740389Z",
+    "agent": "artifacts/live-regression-20261019T213440742457Z"
+  }
+}

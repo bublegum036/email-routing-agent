@@ -1,0 +1,174 @@
+{
+  "run": {
+    "id": "run-a2f7704439534a7f",
+    "message_id": "mail-01",
+    "mode": "agent",
+    "backend": "gemini:gemini-3.5-flash-lite",
+    "started": 1792446849.5573702,
+    "config": {
+      "adapter_version": "2",
+      "case_id": "mail-01",
+      "code_files": {
+        "__init__.py": "a1dcc8fe347a10387b9ea6debaef882c4543d00914bbe8c3cf7402502d56616f",
+        "__main__.py": "15abed0364458cd48f4bf7d6ca63c99107d33d8d46c60087ba3e3b986c6b4dba",
+        "demo_model.py": "2ea74d5d6d7500174cb83222c910efdbd94149d9159dff9fc48ea2a363c4f246",
+        "doctor.py": "093f976e2446138db05b710036efde6fa02185f55ff8fee54016dcf49eba8f7f",
+        "error_cases.py": "8f7f5fcd2813cfb215a14d2471f4c95a38c299164cc16849b6fdfccd0de153a4",
+        "evaluate.py": "41cb2650cc17c475e6945d06e487749dad44036a581b5b93df4e80067d9329b3",
+        "llm.py": "a1eb5ca616ea7d00b8d8c860331bd26d0dc9efe6c3228e2f4a7585066322f2a9",
+        "policy.py": "5d1c882820a58831e77c416f88835f06765d9f477c9155638343bfc47a2db832",
+        "quota.py": "2babb033de363e355369076890488573fa2bfb727cd477b927192697a447827f",
+        "recovery.py": "8ae1a3a924e5576a601dc17324539cd637ed27fb63cd6960f9362b38a3e724b9",
+        "regression.py": "17a71fdf91d33834f2f35fdfaa422d1f2ce9a8e96fa00e9898adf29f41b5e288",
+        "runner.py": "562079c0cf1243b5d358b25c49e42e6f3138253781289aa81eda6e7754203436",
+        "schemas.py": "cb0013b368a4c6cbaa091ba2761c0269919abf4ae3b29f041707e33299862cce",
+        "shipping_change.py": "ccc7b7054d1c49a8c655f054e786f7f54ab629033eb9801c82e69d769abf9904",
+        "smoke.py": "25c1a004a7371985c7d26c890ea25c532909809543eae07c42cc63abcca4ca5b",
+        "source_boundary.py": "afc8384e0a452df17afc272ed939c7704c9193b5da7552be3c9e83e1c38ca1d5",
+        "store.py": "eb3308402a2dfabd3bce754c82955f80a4113e1603ac4b06ff913b8ebf0bdd56",
+        "tools.py": "40aad93452c14c5da95f4b5f995f57082d02f7b0f6dc0d9f50b28256f0318f82",
+        "tracing.py": "d28696257d3030b2ff28c776f6be9f74b844d56babb5665e32b0fb6230bbc13f"
+      },
+      "code_version": "c4b48a8d0ef6925d6ca00e3eaf9a5df405030512fb91b18f98f627063e5ea1bc",
+      "data_policy_version": "1",
+      "dataset_version": "59d1ba93dc9a0b49e6ae486cffe2dedac33ecf1e2701d9c57e5d5f0a54449b7e",
+      "faults": {},
+      "live_model": true,
+      "max_tokens": 2400,
+      "model_config": {
+        "generation": {
+          "max_tokens": 2400,
+          "reasoning_effort": "low",
+          "temperature": 0
+        },
+        "provider": "gemini",
+        "request_interval_seconds": 5,
+        "roles": {
+          "extractor": "gemini-3.5-flash-lite",
+          "planner": "gemini-3.5-flash-lite"
+        }
+      },
+      "model_config_version": "ca45ae05a79dac162c7eb92aac4ca34f866af74113112cc9e587eac809344e45",
+      "model_roles": {
+        "extractor": "gemini-3.5-flash-lite",
+        "planner": "gemini-3.5-flash-lite"
+      },
+      "prompt_version": "4",
+      "provider": "gemini",
+      "reasoning_effort": "low",
+      "requested_model": "gemini-3.5-flash-lite",
+      "temperature": 0,
+      "tool_version": "5",
+      "trace_schema_version": "1"
+    }
+  },
+  "message": {
+    "id": "mail-01",
+    "thread_id": "thread-01"
+  },
+  "message_snapshot_source": "run_start",
+  "issues": [
+    {
+      "id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "payload": {
+        "subject": "Содержимое доступно только сотруднику"
+      },
+      "state": "human_review"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "act-95a47b3c0e564667",
+      "issue_id": "mail-01:issue-1",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data",
+      "review_id": "review-12e74b32c1e445cf",
+      "status": "applied"
+    }
+  ],
+  "events": [
+    {
+      "event_index": 1,
+      "run_id": "run-a2f7704439534a7f",
+      "case_id": "mail-01",
+      "prompt_version": "4",
+      "tool_version": "5",
+      "code_version": "c4b48a8d0ef6925d6ca00e3eaf9a5df405030512fb91b18f98f627063e5ea1bc",
+      "dataset_version": "59d1ba93dc9a0b49e6ae486cffe2dedac33ecf1e2701d9c57e5d5f0a54449b7e",
+      "model_config_version": "ca45ae05a79dac162c7eb92aac4ca34f866af74113112cc9e587eac809344e45",
+      "kind": "run_start",
+      "at": 1792446849.558421,
+      "payload": {
+        "redacted": "staff_only"
+      }
+    },
+    {
+      "call_id": "tool-8e2549e0125f4859",
+      "provider_call_id": null,
+      "started_at": 1792446849.559166,
+      "event_index": 2,
+      "run_id": "run-a2f7704439534a7f",
+      "case_id": "mail-01",
+      "prompt_version": "4",
+      "tool_version": "5",
+      "code_version": "c4b48a8d0ef6925d6ca00e3eaf9a5df405030512fb91b18f98f627063e5ea1bc",
+      "dataset_version": "59d1ba93dc9a0b49e6ae486cffe2dedac33ecf1e2701d9c57e5d5f0a54449b7e",
+      "model_config_version": "ca45ae05a79dac162c7eb92aac4ca34f866af74113112cc9e587eac809344e45",
+      "kind": "tool_request",
+      "at": 1792446849.559167,
+      "payload": {
+        "redacted": "staff_only"
+      }
+    },
+    {
+      "call_id": "tool-8e2549e0125f4859",
+      "duration_seconds": 0.0007235410157591105,
+      "ended_at": 1792446849.559882,
+      "provider_call_id": null,
+      "started_at": 1792446849.559166,
+      "event_index": 3,
+      "run_id": "run-a2f7704439534a7f",
+      "case_id": "mail-01",
+      "prompt_version": "4",
+      "tool_version": "5",
+      "code_version": "c4b48a8d0ef6925d6ca00e3eaf9a5df405030512fb91b18f98f627063e5ea1bc",
+      "dataset_version": "59d1ba93dc9a0b49e6ae486cffe2dedac33ecf1e2701d9c57e5d5f0a54449b7e",
+      "model_config_version": "ca45ae05a79dac162c7eb92aac4ca34f866af74113112cc9e587eac809344e45",
+      "kind": "tool",
+      "at": 1792446849.559883,
+      "payload": {
+        "redacted": "staff_only"
+      }
+    },
+    {
+      "event_index": 4,
+      "run_id": "run-a2f7704439534a7f",
+      "case_id": "mail-01",
+      "prompt_version": "4",
+      "tool_version": "5",
+      "code_version": "c4b48a8d0ef6925d6ca00e3eaf9a5df405030512fb91b18f98f627063e5ea1bc",
+      "dataset_version": "59d1ba93dc9a0b49e6ae486cffe2dedac33ecf1e2701d9c57e5d5f0a54449b7e",
+      "model_config_version": "ca45ae05a79dac162c7eb92aac4ca34f866af74113112cc9e587eac809344e45",
+      "kind": "run_end",
+      "at": 1792446849.560361,
+      "payload": {
+        "elapsed_seconds": 0.003,
+        "model_calls": 0,
+        "status": "completed",
+        "tool_calls": 0
+      }
+    }
+  ],
+  "outgoing": [],
+  "reviews": [
+    {
+      "id": "review-12e74b32c1e445cf",
+      "issue_id": "mail-01:issue-1",
+      "message_id": "mail-01",
+      "queue_ref": "human_review",
+      "reason": "sensitive_data"
+    }
+  ],
+  "redacted_for_staff": true
+}

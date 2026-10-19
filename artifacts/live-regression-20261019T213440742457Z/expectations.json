@@ -1,0 +1,247 @@
+{
+  "version": "regression-v1",
+  "split": "regression",
+  "cases": [
+    {
+      "message": "mail-01",
+      "path": "thread_contract_expired",
+      "routes": [
+        {
+          "customer": "C-12",
+          "category": "technical",
+          "target": "marina"
+        }
+      ],
+      "id": "mail-01",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-02",
+      "path": "paid_not_shipped",
+      "routes": [
+        {
+          "customer": "C-21",
+          "category": "order",
+          "target": "order_operations"
+        }
+      ],
+      "id": "mail-02",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-03",
+      "path": "shipped_logistics",
+      "routes": [
+        {
+          "customer": "C-11",
+          "category": "order",
+          "target": "logistics"
+        }
+      ],
+      "id": "mail-03",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-04",
+      "path": "existing_ticket",
+      "routes": [
+        {
+          "customer": "C-31",
+          "category": "technical",
+          "target": "sergey",
+          "ticket": "T-9"
+        }
+      ],
+      "id": "mail-04",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-05",
+      "path": "thread_approval",
+      "routes": [
+        {
+          "customer": "C-11",
+          "category": "approval",
+          "target": "sales_north"
+        }
+      ],
+      "id": "mail-05",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-06",
+      "path": "identity_unverified",
+      "outcome": "identity",
+      "id": "mail-06",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-07",
+      "path": "two_issues",
+      "routes": [
+        {
+          "customer": "C-21",
+          "category": "purchase",
+          "target": "sales_orion"
+        },
+        {
+          "customer": "C-21",
+          "category": "order",
+          "target": "order_operations"
+        }
+      ],
+      "id": "mail-07",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-08",
+      "path": "forbidden_external_contract",
+      "outcome": "forbidden",
+      "id": "mail-08",
+      "origin": "development",
+      "variant": "original"
+    },
+    {
+      "message": "mail-09",
+      "path": "Из thread-01 восстановить D-12 и C-12; на дату обработки договор истёк, поэтому техническое обращение назначить ответственной marina.",
+      "routes": [
+        {
+          "customer": "C-12",
+          "category": "technical",
+          "target": "marina"
+        }
+      ],
+      "forbidden": [
+        "Выбрать C-11 только по отправителю.",
+        "Назначить engineers_north или general_support.",
+        "Считать D-12 действующим.",
+        "Включить текст письма, свободное резюме или клиентские данные в автоматическое служебное уведомление."
+      ],
+      "id": "mail-09",
+      "origin": "held_out",
+      "variant": "original"
+    },
+    {
+      "message": "mail-10",
+      "path": "Зарегистрированный отправитель и D-21 указывают на C-21; по действующему обычному договору технический вопрос получает general_support.",
+      "routes": [
+        {
+          "customer": "C-21",
+          "category": "technical",
+          "target": "general_support"
+        }
+      ],
+      "forbidden": [
+        "Назначить технический вопрос роли contract_orion.",
+        "Направить обращение в engineers_north.",
+        "Считать договор расширенным или истёкшим.",
+        "Включить текст письма, свободное резюме или клиентские данные в автоматическое служебное уведомление."
+      ],
+      "id": "mail-10",
+      "origin": "held_out",
+      "variant": "original"
+    },
+    {
+      "message": "mail-11",
+      "path": "Определить C-31 и продолжение открытой T-9 в thread-04; дополнить существующую заявку и сохранить исполнителя sergey.",
+      "routes": [
+        {
+          "customer": "C-31",
+          "category": "technical",
+          "target": "sergey",
+          "ticket": "T-9"
+        }
+      ],
+      "forbidden": [
+        "Создать новую заявку вместо дополнения T-9.",
+        "Переназначить обращение другому исполнителю.",
+        "Закрыть T-9 по этому письму.",
+        "Включить текст письма, свободное резюме или клиентские данные в автоматическое служебное уведомление."
+      ],
+      "id": "mail-11",
+      "origin": "held_out",
+      "variant": "original"
+    },
+    {
+      "message": "mail-12",
+      "path": "D-12 указывает на C-12; запрос копии договора на произвольный внешний адрес передать сотруднику для ручного разбора без автоматической отправки.",
+      "outcome": "forbidden",
+      "forbidden": [
+        "Автоматически отправить договор или его содержание на указанный адрес.",
+        "Считать письмо подтверждением полномочий внешнего получателя.",
+        "Передать договор или иные критические данные облачной модели.",
+        "Предоставить модели инструмент разрешения отправки от имени сотрудника.",
+        "Включить текст письма, свободное резюме или клиентские данные в автоматическое служебное уведомление."
+      ],
+      "id": "mail-12",
+      "origin": "held_out",
+      "variant": "original"
+    },
+    {
+      "id": "order-transient",
+      "message": "mail-02",
+      "variant": "transient",
+      "origin": "found_error",
+      "path": "order-transient",
+      "routes": [
+        {
+          "customer": "C-21",
+          "category": "order",
+          "target": "order_operations"
+        }
+      ]
+    },
+    {
+      "id": "order-unavailable",
+      "message": "mail-02",
+      "variant": "unavailable",
+      "origin": "found_error",
+      "path": "order-unavailable",
+      "outcome": "source_unavailable"
+    },
+    {
+      "id": "order-shipped",
+      "message": "mail-02",
+      "variant": "shipped",
+      "origin": "found_error",
+      "path": "order-shipped",
+      "routes": [
+        {
+          "customer": "C-21",
+          "category": "order",
+          "target": "logistics"
+        }
+      ]
+    },
+    {
+      "id": "order-missing-shipping",
+      "message": "mail-02",
+      "variant": "missing_shipping",
+      "origin": "found_error",
+      "path": "order-missing-shipping",
+      "outcome": "source_incomplete"
+    },
+    {
+      "id": "critical-boundary",
+      "message": "mail-01",
+      "variant": "critical",
+      "origin": "found_error",
+      "path": "critical-boundary",
+      "outcome": "critical"
+    }
+  ],
+  "note": "Former held-out examples are now known regression cases. Expectations are not model input.",
+  "forbidden": [
+    "Automatic customer-content delivery",
+    "Invented source facts",
+    "Duplicate or misassigned tickets",
+    "Cloud access to critical or unclassified records"
+  ]
+}
