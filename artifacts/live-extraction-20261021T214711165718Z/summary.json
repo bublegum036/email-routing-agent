@@ -1,0 +1,384 @@
+{
+  "benchmark": "raw_extraction_only",
+  "live_model": true,
+  "model": "gemini-3.5-flash-lite",
+  "provider": "gemini",
+  "generation_config": {
+    "temperature": 0,
+    "max_tokens": 2400,
+    "reasoning_effort": "low"
+  },
+  "suite_hash": "972f4ab72b1e6ea28cfb6aebf43216532dd53b1180c535539f06123609379801",
+  "prompt_hash": "a0349b53214239bc2e7a0f0ed435800a0163fa704dc5a30bb59d7ab4c93627e8",
+  "schema_hash": "1d775081602678abb500204825084ad58476c6ce68534b62026a80c18c1a42b7",
+  "checks": [
+    {
+      "id": "typos-order",
+      "passed": true,
+      "problems": [],
+      "trace": "typos-order.json"
+    },
+    {
+      "id": "caps-delivery",
+      "passed": true,
+      "problems": [],
+      "trace": "caps-delivery.json"
+    },
+    {
+      "id": "negated-purchase",
+      "passed": false,
+      "problems": [
+        "ungrounded_extracted_reference",
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "negated-purchase.json"
+    },
+    {
+      "id": "purchase-not-breakdown",
+      "passed": true,
+      "problems": [],
+      "trace": "purchase-not-breakdown.json"
+    },
+    {
+      "id": "technical-not-order",
+      "passed": true,
+      "problems": [],
+      "trace": "technical-not-order.json"
+    },
+    {
+      "id": "approval-negative",
+      "passed": true,
+      "problems": [],
+      "trace": "approval-negative.json"
+    },
+    {
+      "id": "purchase-versus-approval",
+      "passed": true,
+      "problems": [],
+      "trace": "purchase-versus-approval.json"
+    },
+    {
+      "id": "old-reference",
+      "passed": true,
+      "problems": [],
+      "trace": "old-reference.json"
+    },
+    {
+      "id": "quoted-old-issue",
+      "passed": true,
+      "problems": [],
+      "trace": "quoted-old-issue.json"
+    },
+    {
+      "id": "missing-reference",
+      "passed": true,
+      "problems": [],
+      "trace": "missing-reference.json"
+    },
+    {
+      "id": "malformed-reference",
+      "passed": false,
+      "problems": [
+        "ungrounded_extracted_reference",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "malformed-reference.json"
+    },
+    {
+      "id": "external-injection",
+      "passed": true,
+      "problems": [],
+      "trace": "external-injection.json"
+    },
+    {
+      "id": "unknown",
+      "passed": true,
+      "problems": [],
+      "trace": "unknown.json"
+    },
+    {
+      "id": "invoice-not-order",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count"
+      ],
+      "trace": "invoice-not-order.json"
+    },
+    {
+      "id": "same-owner-two-categories",
+      "passed": true,
+      "problems": [],
+      "trace": "same-owner-two-categories.json"
+    },
+    {
+      "id": "two-orders",
+      "passed": true,
+      "problems": [],
+      "trace": "two-orders.json"
+    },
+    {
+      "id": "two-issues-noisy",
+      "passed": true,
+      "problems": [],
+      "trace": "two-issues-noisy.json"
+    },
+    {
+      "id": "ticket-technical",
+      "passed": false,
+      "problems": [
+        "ungrounded_extracted_quote",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "ticket-technical.json"
+    },
+    {
+      "id": "conference-attendee",
+      "passed": true,
+      "problems": [],
+      "trace": "conference-attendee.json"
+    },
+    {
+      "id": "conference-speaker",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "conference-speaker.json"
+    },
+    {
+      "id": "exhibition-booth",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "exhibition-booth.json"
+    },
+    {
+      "id": "exhibition-buyers",
+      "passed": true,
+      "problems": [],
+      "trace": "exhibition-buyers.json"
+    },
+    {
+      "id": "vendor-offer-terminals",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "vendor-offer-terminals.json"
+    },
+    {
+      "id": "buyer-request-terminals",
+      "passed": true,
+      "problems": [],
+      "trace": "buyer-request-terminals.json"
+    },
+    {
+      "id": "vendor-procurement-subject",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "vendor-procurement-subject.json"
+    },
+    {
+      "id": "buyer-procurement-subject",
+      "passed": true,
+      "problems": [],
+      "trace": "buyer-procurement-subject.json"
+    },
+    {
+      "id": "marketing-discount",
+      "passed": true,
+      "problems": [],
+      "trace": "marketing-discount.json"
+    },
+    {
+      "id": "marketing-quoted-intent",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "marketing-quoted-intent.json"
+    },
+    {
+      "id": "marketing-fake-approval",
+      "passed": true,
+      "problems": [],
+      "trace": "marketing-fake-approval.json"
+    },
+    {
+      "id": "spam-prize",
+      "passed": true,
+      "problems": [],
+      "trace": "spam-prize.json"
+    },
+    {
+      "id": "spam-fake-shipment",
+      "passed": true,
+      "problems": [],
+      "trace": "spam-fake-shipment.json"
+    },
+    {
+      "id": "phishing-mailbox",
+      "passed": true,
+      "problems": [],
+      "trace": "phishing-mailbox.json"
+    },
+    {
+      "id": "cold-partnership",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "cold-partnership.json"
+    },
+    {
+      "id": "real-order-marketing-footer",
+      "passed": true,
+      "problems": [],
+      "trace": "real-order-marketing-footer.json"
+    },
+    {
+      "id": "bailiff-information-request",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "bailiff-information-request.json"
+    },
+    {
+      "id": "bailiff-enforcement-order",
+      "passed": true,
+      "problems": [],
+      "trace": "bailiff-enforcement-order.json"
+    },
+    {
+      "id": "court-summons",
+      "passed": true,
+      "problems": [],
+      "trace": "court-summons.json"
+    },
+    {
+      "id": "court-decision",
+      "passed": true,
+      "problems": [],
+      "trace": "court-decision.json"
+    },
+    {
+      "id": "government-fine",
+      "passed": true,
+      "problems": [],
+      "trace": "government-fine.json"
+    },
+    {
+      "id": "fake-bailiff-payment",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "fake-bailiff-payment.json"
+    },
+    {
+      "id": "claim-nondelivery",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-nondelivery.json"
+    },
+    {
+      "id": "claim-nondelivery-no-id",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-nondelivery-no-id.json"
+    },
+    {
+      "id": "claim-shortage",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-shortage.json"
+    },
+    {
+      "id": "claim-shortage-noisy",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-shortage-noisy.json"
+    },
+    {
+      "id": "claim-late-delivery",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-late-delivery.json"
+    },
+    {
+      "id": "claim-late-already-received",
+      "passed": true,
+      "problems": [],
+      "trace": "claim-late-already-received.json"
+    },
+    {
+      "id": "quality-not-working",
+      "passed": true,
+      "problems": [],
+      "trace": "quality-not-working.json"
+    },
+    {
+      "id": "quality-intermittent",
+      "passed": true,
+      "problems": [],
+      "trace": "quality-intermittent.json"
+    },
+    {
+      "id": "quality-existing-ticket",
+      "passed": true,
+      "problems": [],
+      "trace": "quality-existing-ticket.json"
+    },
+    {
+      "id": "quality-legal-refund",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "quality-legal-refund.json"
+    },
+    {
+      "id": "delay-legal-penalty",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "delay-legal-penalty.json"
+    },
+    {
+      "id": "shortage-and-quality",
+      "passed": true,
+      "problems": [],
+      "trace": "shortage-and-quality.json"
+    },
+    {
+      "id": "delay-and-quality",
+      "passed": true,
+      "problems": [],
+      "trace": "delay-and-quality.json"
+    },
+    {
+      "id": "quality-no-delivery-claim",
+      "passed": true,
+      "problems": [],
+      "trace": "quality-no-delivery-claim.json"
+    }
+  ],
+  "pending": 0,
+  "stopped": false
+}

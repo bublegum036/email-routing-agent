@@ -1,0 +1,137 @@
+{
+  "benchmark": "raw_extraction_only",
+  "live_model": true,
+  "model": "gemini-3.5-flash-lite",
+  "provider": "gemini",
+  "generation_config": {
+    "temperature": 0,
+    "max_tokens": 2400,
+    "reasoning_effort": "low"
+  },
+  "suite_hash": "2291bc28ad500f08ec8d2c9d467e3a2c357022b0f251651270d0e42a16bb23c2",
+  "prompt_hash": "a0349b53214239bc2e7a0f0ed435800a0163fa704dc5a30bb59d7ab4c93627e8",
+  "checks": [
+    {
+      "id": "typos-order",
+      "passed": true,
+      "problems": [],
+      "trace": "typos-order.json"
+    },
+    {
+      "id": "caps-delivery",
+      "passed": true,
+      "problems": [],
+      "trace": "caps-delivery.json"
+    },
+    {
+      "id": "negated-purchase",
+      "passed": false,
+      "problems": [
+        "ungrounded_extracted_reference",
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "negated-purchase.json"
+    },
+    {
+      "id": "purchase-not-breakdown",
+      "passed": true,
+      "problems": [],
+      "trace": "purchase-not-breakdown.json"
+    },
+    {
+      "id": "technical-not-order",
+      "passed": true,
+      "problems": [],
+      "trace": "technical-not-order.json"
+    },
+    {
+      "id": "approval-negative",
+      "passed": true,
+      "problems": [],
+      "trace": "approval-negative.json"
+    },
+    {
+      "id": "purchase-versus-approval",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "purchase-versus-approval.json"
+    },
+    {
+      "id": "old-reference",
+      "passed": true,
+      "problems": [],
+      "trace": "old-reference.json"
+    },
+    {
+      "id": "quoted-old-issue",
+      "passed": true,
+      "problems": [],
+      "trace": "quoted-old-issue.json"
+    },
+    {
+      "id": "missing-reference",
+      "passed": true,
+      "problems": [],
+      "trace": "missing-reference.json"
+    },
+    {
+      "id": "malformed-reference",
+      "passed": false,
+      "problems": [
+        "ungrounded_extracted_reference",
+        "wrong_extracted_reference_or_issue_link"
+      ],
+      "trace": "malformed-reference.json"
+    },
+    {
+      "id": "external-injection",
+      "passed": true,
+      "problems": [],
+      "trace": "external-injection.json"
+    },
+    {
+      "id": "unknown",
+      "passed": true,
+      "problems": [],
+      "trace": "unknown.json"
+    },
+    {
+      "id": "invoice-not-order",
+      "passed": false,
+      "problems": [
+        "wrong_extracted_categories_or_count"
+      ],
+      "trace": "invoice-not-order.json"
+    },
+    {
+      "id": "same-owner-two-categories",
+      "passed": true,
+      "problems": [],
+      "trace": "same-owner-two-categories.json"
+    },
+    {
+      "id": "two-orders",
+      "passed": true,
+      "problems": [],
+      "trace": "two-orders.json"
+    },
+    {
+      "id": "two-issues-noisy",
+      "passed": true,
+      "problems": [],
+      "trace": "two-issues-noisy.json"
+    },
+    {
+      "id": "ticket-technical",
+      "passed": true,
+      "problems": [],
+      "trace": "ticket-technical.json"
+    }
+  ],
+  "pending": 0,
+  "stopped": false
+}

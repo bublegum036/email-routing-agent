@@ -13,6 +13,7 @@ import time
 from .__main__ import ROOT
 from .demo_model import DemoModel
 from .error_cases import assess_case
+from .extraction_eval import assess_report_extraction
 from .llm import ChatModel, ModelError, load_env
 from .policy import routing_notice
 from .runner import Runner
@@ -65,6 +66,11 @@ def continuation(previous, suite, seed, hashes, live_model, model):
 
 
 def assess_result(case, store, report, initial_tickets):
+    return sorted(set(assess_report_extraction(case, report)
+                      + assess_routing_result(case, store, report, initial_tickets)))
+
+
+def assess_routing_result(case, store, report, initial_tickets):
     end = report["events"][-1]["payload"]
     if case.get("outcome") == "identity":
         return assess_case("ambiguous", store, report, end["model_calls"], initial_tickets)
@@ -179,7 +185,7 @@ def save_summary(directory, summary):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--offline", action="store_true")
-    parser.add_argument("--suite", type=Path, default=ROOT / "data/evaluation-dev.json")
+    parser.add_argument("--suite", type=Path, default=ROOT / "data/evaluation-dev-v2.json")
     parser.add_argument("--seed", type=Path, default=ROOT / "data/seed.json")
     parser.add_argument("--continue-from", type=Path, help="Previous comparison directory; keep all attempts and retry unfinished checks")
     parser.add_argument("--request-interval", type=float, default=5,

@@ -1,0 +1,31 @@
+{
+  "benchmark": "raw_extraction_only",
+  "live_model": true,
+  "model": "gemini-3.1-flash-lite",
+  "provider": "gemini",
+  "generation_config": {
+    "temperature": 0,
+    "max_tokens": 2400,
+    "reasoning_effort": "low"
+  },
+  "suite_hash": "2291bc28ad500f08ec8d2c9d467e3a2c357022b0f251651270d0e42a16bb23c2",
+  "prompt_hash": "a0349b53214239bc2e7a0f0ed435800a0163fa704dc5a30bb59d7ab4c93627e8",
+  "checks": [
+    {
+      "id": "typos-order",
+      "passed": true,
+      "problems": [],
+      "trace": "typos-order.json"
+    },
+    {
+      "id": "caps-delivery",
+      "passed": false,
+      "problems": [
+        "model_error"
+      ],
+      "trace": "caps-delivery.json"
+    }
+  ],
+  "pending": 16,
+  "stopped": true
+}
